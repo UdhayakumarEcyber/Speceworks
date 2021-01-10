@@ -1,0 +1,1187 @@
+.lost_found-section{
+    display: inline-block;
+    width: 100%;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    height: 100%;
+
+    .technician_chart-section{
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+
+        .technician_chart{
+            display: inline-block;
+            width: 100%;
+            left: -20px;
+            position: relative;
+            height: 98%;  
+
+            .recharts-wrapper{ 
+                .recharts-layer{
+                    font-size: 8px;  
+                } 
+            }
+           
+            .recharts-legend-wrapper{
+                display: inline-block;
+                width: auto!important;
+                right: 0!important;
+                left: unset!important;
+                top: -25px !important;
+                bottom: unset!important; 
+            } 
+        }
+
+        .lost_found-table{
+
+            .list-item{
+                .category{
+                    display: inline-block;
+                    width: 60%;
+                    span{
+                        display: inline-block;
+                        width: 40px;
+                        height: 40px;
+                        vertical-align: middle;
+                        margin-right: 15px;
+                        img{
+                            max-width: 100%;
+                            max-height: 100%;
+                        }
+                    }
+                } 
+                .reported_time{
+                    display: inline-block;
+                    width: 17%;
+                }
+                .location{
+                    display: inline-block;
+                    width: 17%;
+                }
+                .filter{
+                    display: inline-block;
+                    width: 8%;
+                }
+            }
+        }
+
+        &#totalTechnician{              
+            height: 45%; 
+        }  
+    }
+
+    .sample-subtitle{
+        background-color: #8d548140;
+    }
+    .list-card{
+        display: inline-block;
+        width: 100%;
+        margin-top: 10px;
+
+        .sample-item-field{
+            .label{
+                font-size: 10px;
+                font-weight: 600; 
+                width: 40%;
+            }
+       
+
+        .value{ 
+            display: inline-block;
+            width: 100%;
+                .percentage{
+                    .up, .down{
+                        display: inline-block;
+                        width: 12px;
+                        height: 12px;
+                        background-position: center center;
+                        background-repeat: no-repeat;
+                        background-size: 100% auto;
+                    }
+    
+                    .up{ 
+                        background-image: url(https://static.iviva.com/images/top-green-arrow.png); 
+                    }
+                    .down{ 
+                        background-image: url(https://static.iviva.com/images/bottom-green-arrow.png); 
+                    }
+                }
+            }
+        }
+    } 
+}
+span.recharts-legend-item-text {
+    font-size: 10px;
+    text-transform: capitalize;
+}
+.action-section{
+    display: inline-flex;
+    width: 75%;
+
+    .digi_twin-rgt{
+        display: inline-flex;
+        width: 100%;
+
+        .digital-selbox{
+            display: inline-block;
+            width: 30%;
+            padding: 0 10px;
+        }
+        .digital-sm-bar{
+            display: inline-block;
+            width: 30%;
+            padding: 30px 10px 20px 10px;
+            &.digital-filter-bar{
+                padding: 40px 10px 20px 10px;
+                width: 7%;
+            }
+        }
+    }
+}
+
+.nav_bar_section{
+    display: inline-flex;
+    width: 100%;
+    margin: 0 0 2em 0;
+
+    .nav_bar{
+        display: inline-block;
+        /* width: 15%;
+         margin: 0 5%;*/
+
+        width: 100%;
+        margin: 0 0%;
+
+        &:first-child{
+            margin-left: 0;
+        }
+        &:last-child{
+            margin-right: 0;
+        }
+
+        .nav_bar_icon{
+            display: inline-block;
+                padding: 10px;
+                background: #fff;
+                border-radius: 10px;
+                width: 100%;
+                height: 130px; 
+                position: relative;
+
+                .profile-image-container{
+                    transform: translate(-50%, -50%);
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                }
+        }
+        .nav_bar_name{
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            margin-top: 10px;
+            line-height: 1.3em; 
+        }
+    }
+}
+
+.clog-top-calen{
+    position: absolute;
+    top: 12px;
+    right: 30px;
+}
+
+.clog-section{
+    display: inline-flex;
+    margin-top: 2.5em;
+
+    .clog-section-lft{
+        display: inline-block;
+        width: 20%;
+
+        .clog-ahu-filter{
+            display: inline-block;
+            width: 100%;
+            position: relative;
+            text-align: center; 
+
+            .ahu-filter-pict{ 
+                background-image: url(https://static.iviva.com/images/Maf_dashboard/AHU-filter.svg);
+                width: 140px;
+                height: 140px;   
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-size: 100%; 
+                display: inline-block;
+            }
+            .ahu-filter-txt{  
+                margin: 10px 0 0 0;
+                text-align: left;
+                display: inline-block;
+
+                h4{
+                    font-size: 2em;
+                    margin: 0;
+                }
+                p{
+                    font-size: 11px;
+                    margin: 5px 0 0 0;
+                }
+
+            }
+        }
+
+    }
+    .clog-section-rgt{
+        display: inline-block;
+        width: 80%;
+
+        .clog_data_list{
+            display: inline-block;
+            .list-item-header{
+                 background-color: #fef7f3;
+                 border-radius: 10px 10px 0 0;
+
+                .list-item-elmt{
+                    font-size: 10px;
+                    &.asset{
+                        width: 29%;
+                    }
+                    &.gradient{
+                        width: 13%;
+                    }
+                    &.feedback{
+                        width: 19%;
+                    }
+                    &.pressure_value{
+                        width: 15%;
+                    }
+                    &.pressure_low{
+                        width: 24%;
+
+                        .uxp-form-group{
+                            margin-bottom: 0;
+                            margin-top: -10px;
+                        
+                        }
+                    }
+                }
+            }
+
+            .data-list{
+
+                .data-list-item{ 
+
+                    &:nth-child(even){
+                        .list-item{
+                            background-color: #fef7f3;
+                        } 
+                    }
+                    &:nth-child(odd){
+                        .list-item{
+                            background-color: #f5ebe5;
+                        } 
+                    }
+                    .list-item{   display: inline-block;
+
+                    .up, .down{
+                        display: inline-block;
+                        background-position: center center;
+                        background-repeat: no-repeat;
+                        background-size: 100%;
+                        width: 12px;
+                        height: 12px;
+                        margin-top: 0px;
+                        position: absolute;
+                        margin-left: 3px;
+                    } 
+                    .list-item-elmt{
+                        background: #fff;
+                        padding: 5px 10px;
+                        border-radius: 5px;
+                        box-shadow: 0px 0px 7px #2c2c2c78;
+                        
+                        
+                        display: inline-block;
+                        width: 6%;
+                        margin: 0 6%;
+
+                        &.asset{
+                            // width: auto;
+
+                            width: 21%;
+                            display: inline-block;
+                            margin: 0 2% 0 0;
+                        }
+                    }
+                    .up{
+                        background-image: url(https://static.iviva.com/images/Maf_dashboard/top-arrow.svg);
+                    }
+                    .down{
+                        background-image: url(https://static.iviva.com/images/Maf_dashboard/down-arrow.svg);
+                    }
+                }
+
+                }
+
+               
+
+                // .data-list-item:nth-child(even){
+                //     .list-item{
+                //         background-color: #fef7f3;
+                //     } 
+                // }
+
+                // .data-list-item:nth-child(odd){
+                //     .list-item{
+                //         background-color: #f5ebe5;
+                //     } 
+                // }
+            }
+        }
+    }
+}
+
+.recharts-tooltip-cursor, .recharts-cartesian-grid{
+
+    display: none;
+}
+ 
+.technician_chart{
+    .recharts-surface{
+        .recharts-layer{
+            &:nth-child(even){
+                .recharts-bar-rectangles{
+                    .recharts-layer{
+                        .recharts-bar-rectangle{ 
+                            path{
+                                &:hover{
+                                    fill: #c8c8c8;
+                                }
+                            } 
+                        }
+                    }
+                }
+            }
+
+            &:nth-child(odd){
+                .recharts-bar-rectangles{
+                    .recharts-layer{
+                        .recharts-bar-rectangle{ 
+                            path{
+                                &:hover{
+                                    fill: #efefef;
+                                }
+                            } 
+                        }
+                    }
+                }
+            } 
+                     
+        }
+    }
+} 
+ 
+
+.my-custom-tooltip{
+    display: inline-block;
+    width: 100px;
+   
+
+    .overall-tooltip{
+        display: inline-block;
+        width: 100%;
+        background-color: #48809d;
+        margin-top: 10px;
+        color: #fff;
+
+        .cust-tooltip-lft{
+            display: inline-block;
+            width: 40%;
+            text-align: center;
+        }
+        .cust-tooltip-rht{
+            display: inline-block;
+            width: 40%;
+            text-align: center;
+        }
+        p{
+            display: inline-block;
+            width: 10%;
+            text-align: center;
+        }
+    }
+}
+
+
+
+.uti-analytics_rht{
+    display: inline-block;
+    margin-top: 2.5em;
+    margin-left: 3em;
+    width: 100%;
+
+    &.efficiency-analytics_rht{
+        width: 100%;
+
+        .uti-sel-boxes{
+           width: auto;
+           float: right;
+        }
+    }
+
+    .uti-tabs{
+        display: inline-block; 
+        width: 20%;
+
+        .uxp-toggle-filter{
+            display: inline-block;
+            width: 100%;
+
+                .uxp-toggle-option{
+                    text-align: center;
+                    display: inline-block;
+                    width: auto;
+                    font-size: 0.8em;
+                    padding: 8px 15px;
+                    margin: auto 2px;
+                    text-transform: capitalize;
+
+                    &.selected{
+                        background-color: #ec4b7b;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+        .uti-sel-boxes{
+            // display: inline-block;
+            margin-left: 0em;
+            width: 70%;
+            float: right;
+
+            .uti-sel-box{
+                display: inline-block;
+                width: 31%;
+                vertical-align: top;
+                margin-left: 3%;
+                    &.sel-margin{
+                        margin: 0;
+                    }
+
+                .showcase-input{
+                    display: inline-block;
+                    padding: 0;
+                    margin: 0;
+                    font-size: 0.8em;
+                    width: 100% !important;
+
+                        .uxp-form-select{
+                            display: inline-block;
+                            min-width: 100%;  
+                        }
+                }
+                &.search-box{
+                    .uxp-form-group{
+                        padding: 0;
+                    }
+                }
+            }
+        }
+
+        .uti-chk-box{
+            display: inline-block;
+            margin: 0 0 0 15px;
+
+            .showcase-checkbox{
+                display: inline-block;
+                padding: 0;
+                margin: 0;
+                width: 100% !important;
+
+                 .uxp-form-checkbox.toggle-line{ 
+
+                    .checkbox-placeholder{
+                        height: 2px;
+                        background: #424242;
+                        
+                        &:before{
+                            background-color: #828282;
+                        }
+
+                    }
+                }
+
+                label{
+                    font-size: 9px;
+                }
+            }
+        }
+        .uti-filter{
+            display: inline-block;
+            margin: 0.7em 0 0 1em;
+            vertical-align: top;
+
+            .filter-panel-btn { 
+                width: 30px;
+                height: 30px;
+            }
+           
+        }
+}
+
+.chart-top-section{
+    display: inline-block;
+    width: 100%;
+    margin-top: 10px;
+
+    .analytics-used-details{
+        display: inline-block;
+        width: 48%;
+        vertical-align: middle;
+
+        ul{
+            display: inline-block;
+            width: 100%;
+            text-align: left;
+            vertical-align: top;
+            margin: 0;
+
+            li{
+                display: inline-block;
+                width: 23%;
+                position: relative;
+                vertical-align: top;
+
+                span.used-det-strip{
+                    display: inline-block;
+                    width: 2px;
+                    height: 30px;
+                    background: #4cccbb;
+                    position: absolute;
+                    left: 0;
+                    top: 0; 
+                    &.meeting-strip{
+                        background: #4cccbb;
+                    }
+                    &.under_used-strip{
+                        background: #474747;
+                    }
+                    &.over_Used-strip{
+                        background: #c1c1c1;
+                    }
+                }
+                h3{
+                    display: inline-block;
+                    width: 80%;
+                    margin: 0 0 0 10%;
+                    padding: 0; 
+                }
+                p{
+                    display: inline-block;
+                    width: 80%;
+                    margin: 5px 0 0 10%;
+                    padding: 0;
+                    font-size: 0.7em;
+                    text-transform: uppercase; 
+                }
+            }
+        }
+    }
+
+    .uti-chart-legend{
+        display: inline-block;
+        width: 38%;
+        vertical-align: middle;
+
+        &.efficiency-legend{
+            width: 38%;
+            ul{
+                margin-left: 10%;
+
+                li{
+                    width: 20%;
+                }
+            }
+        }
+
+        ul{
+            display: inline-block;
+            width: 100%;
+            text-align: left;
+            vertical-align: top;
+            margin: 8px 0 0 0;
+            padding: 0;
+
+            li{
+                display: inline-block;
+                width: 33%;
+                position: relative;
+                vertical-align: top;
+
+                span.chart-legend-round{
+                    display: inline-block;
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                    margin: 5px 0 0 0;
+                    &.chart-legend-meeting{
+                        background: #4cccbb;
+                    }
+                    &.chart-legend-booked{
+                        background: #474747;
+                    }
+                    &.chart-legend-occupied{
+                        background: #c1c1c1;
+                    }
+                } 
+                p{
+                    display: inline-block;
+                    width: 80%;
+                    margin: 6px 0 0 5%;
+                    padding: 0;
+                    font-size: 0.7em;
+                    text-transform: uppercase;
+                    vertical-align: top;
+                }
+            }
+        }
+    }
+    .room-range{
+        margin-right: 15px;
+        float: right;
+        font-size: 10px;
+    }
+
+    .uti-tabs{
+        display: inline-block;
+        margin-top: 0.5em;
+        vertical-align: middle;
+
+        .uxp-toggle-filter{
+            display: inline-block;
+            width: 100%;
+
+                .uxp-toggle-option{
+                    text-align: center;
+                    display: inline-block;
+                    width: auto;
+                    font-size: 0.8em;
+                    padding: 8px 15px;
+                    margin: auto 2px;
+                    text-transform: capitalize;
+
+                    &.selected{
+                        background-color:  #4cccbb;
+                        color: #424242;
+                    }
+                }
+            }
+        }
+} 
+
+#lostFound_Analytics{ 
+    display: inline-block;
+
+}
+
+#profile_Card{ 
+    background: #f8ba7b; /* Old browsers */
+    background: -moz-linear-gradient(-45deg, #f8ba7b 0%, #f8ba7b 19%, #605ae6 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, #f8ba7b 0%,#f8ba7b 19%,#605ae6 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg, #f8ba7b 0%,#f8ba7b 19%,#605ae6 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8ba7b', endColorstr='#605ae6',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    height: 100%;
+    padding-top: 5em;
+
+    .item-card{
+        background: transparent;
+    }
+    .profile-lft{
+        display: inline-block;
+        width: 35%;
+        text-align: center;
+        .profile-pict{
+            display: inline-block;
+            width: 150px;
+            height: 150px;
+            background: #fff;
+            border-radius: 50%;
+            background-image: url('https://static.iviva.com/images/UXP_spaceworks/black-handbag.png');
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+    }
+    .profile-rgt{
+        display: inline-block;
+        width: 60%;
+        margin-left: 5%;
+        position: relative; 
+        height: 92%;
+
+        .profile-details{
+            display: inline-block;
+            color: #fff;
+            button.profile-btn{
+                display: inline-block;
+                background: #605ae633;
+                color: #fff;
+                font-size: 12px;
+            }
+            h5{
+                font-size: 1.2em;
+                margin: 15px 0 0 0;
+                font-weight: 500;
+            }
+            h1{
+                font-size: 1.8em;
+                margin: 15px 0 0 0;
+                font-weight: 500;
+            }
+            p{
+                font-size: 0.8em;
+                margin: 15px 0 0 0;
+            }
+            .profile-details-bot{
+                display: inline-block;
+                position: absolute;
+                bottom: 3em;
+                    button.profile-btn{
+                        margin-right: 2em;
+                        display: inline-flex;
+                    }
+            }
+        }
+    }
+}
+
+.Almasjid-header{
+    .uti-analytics_rht { 
+        .uti-sel-boxes { 
+            width: 30%; 
+            .uti-sel-box{
+                width: 100%;
+            }
+        }
+    }
+}
+
+#Almasjid_Widget{
+    display: inline-block;
+    position: relative;
+
+    .uxp-item-list-card{
+        overflow-y: auto;
+        width: 93%; 
+        height: 95%;
+        overflow-x: auto;
+        margin-left: 2%;
+        overflow-y: hidden;
+   
+
+        .header{
+            display: none;
+        }
+        
+        .body{
+            display: inline-flex;
+            width: 130%;
+            overflow: hidden;
+            padding: 20px 15px;
+
+            .box {
+                background:#dadada61;
+                border-radius: 20px; 
+                display: inline-block;
+                // width: 30%;
+                width: 225px;
+                margin-left: 1em;
+                position: relative;
+                text-align: center;
+                vertical-align: top;
+                height: 225px;
+                cursor: pointer;
+                &:hover{
+                    border-radius: 50%; 
+                    .box-top, .box-bot{
+                        background: #fff;
+                        padding: 6px 10px 2px 10px;
+                        border-radius: 20px;
+                    }
+                    .box-top{
+                        top:5em;
+                    }
+                    .box-bot{
+                        bottom: 5em;
+                    }
+                    .box-item{
+                        padding: 3em 0;
+                        margin: 4.5em 0;
+
+                        
+
+                        .box-items_icon{
+                            width: 60px;
+                            height: 52px;
+                        }
+
+                        p{
+                            display: none;
+                        }
+                    }
+                }
+
+                &:first-child{
+                    margin-left: 0;
+                    background:#ffacf44d;
+                }
+                .box-top, .box-bot{
+                    display: inline-block;
+                    position: absolute; 
+                    text-align: left;
+                    vertical-align: top;
+                    .label{
+                        display: inline-block;
+                        font-size: 12px;
+                        width: 23px;
+                        padding: 5px 0 0 0;
+                        margin: 0;
+                        vertical-align: top;
+                    }
+                }
+                    .box-top{ 
+                        top: 2em;
+                        left: 2em;  
+                        .top-icon{
+                            display: inline-block;
+                            width: 20px;
+                            height: 20px;
+                            img{
+                                max-width: 100%;
+                            }
+                        }
+                    }
+
+                    .box-item{
+                        display: inline-block;
+                        width: 10em;
+                        border-radius: 50%;
+
+                        border-style: solid;
+                        border-width: 4px;
+                        // border-image: linear-gradient(45deg, rgb(0,143,104), rgb(250,224,66)) 1;
+
+                        height: 10em;
+                        padding: 2em 0;
+                        margin: 4.5em 0;
+                        p{
+                            display: inline-block;
+                            width: 100%;
+                            padding: 0;
+                            margin: 0;
+                            font-size: 10px;
+                        }
+                        .box-items_icon{
+                            display: inline-block;
+                            width: 40px;
+                            height: 40px;
+                            img{
+                                max-width: 100%;
+                                max-height: 100%;
+                            }
+                        }
+                    }
+
+                    .box-bot{ 
+                        bottom: 2em;
+                        right: 2em;  
+                        .bot-icon{
+                            display: inline-block;
+                            width: 20px;
+                            height: 20px;
+                            img{
+                                max-width: 100%;
+                            }
+                        }
+                    } 
+                }
+            }
+    }
+    #Almas_lft_arrow{
+        background: url('https://static.iviva.com/images/arrow-bot.svg') no-repeat center center;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+        transform: rotate(270deg);
+        right: 15px;
+        cursor: pointer;
+    }
+}
+
+#Map_Widget{
+    .building_map{
+        background: url('https://static.iviva.com/images/UXP_spaceworks/map-pict.svg') no-repeat center center; 
+        height: 37em;
+        width: 100%;
+        display: inline-block;
+        margin: 0em 0em;
+        position: relative;
+
+        .social-distancing-vilation{
+            position: absolute;
+            width: 30%;
+            bottom: 2em;
+            left: 2em;
+            background-color: #fff;
+            border-radius: 25px;
+
+            .social-distancing-sec{
+                display: inline-flex;
+                width: 75%;
+                vertical-align: top;
+                padding-top: 8px;
+                padding: 10px 20px 10px 20px;
+                box-sizing: border-box;
+
+                .social-distancing-sec-pict{
+                    display: inline-block;
+                    width: 25px;
+                    height: 25px;
+                    background: url('https://static.iviva.com/images/UXP_spaceworks/social-view-icon.svg') no-repeat center center; 
+                }
+                label{
+                    font-size: 12px;
+                    padding: 8px 0 0 10px;
+                    margin: 0;
+                    width: 75%;
+                }
+                em{
+                    font-size: 15px;
+                    font-style: normal;
+                    padding: 8px 0 0 0;
+                    margin: 0;
+                } 
+            }
+            .social-distancing-check{
+                display: inline-block;
+                font-size: 12px;
+            } 
+        }
+
+        .map-list-items{
+            display: inline-flex;
+            position: absolute;
+            width: 26%;
+            bottom: 2em;
+            right: 2em;
+            background-color: #fff;
+            border-radius: 25px;
+            padding: 10px 20px 10px 20px;
+            .map-item{
+                display: inline-block;
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-size: contain;
+                height: 23px;
+                width: 23px;
+                margin-right: 20px;
+                cursor: pointer;
+
+                &.enlarge-item{ 
+                    background-image: url('https://static.iviva.com/images/UXP_spaceworks/icon-expand.svg');
+                }
+                &.material-tool{
+                    background-image: url('https://static.iviva.com/images/UXP_spaceworks/icon-material-tool.svg');
+                }
+                &.map-data-count{
+                    background-image: url('https://static.iviva.com/images/UXP_spaceworks/map-data-count.svg');
+                    width: 30px;
+                    height: 30px;
+                }
+                &.zone-item{
+                    background-image: url('https://static.iviva.com/images/UXP_spaceworks/zone-btn.svg');
+                    width: 40%;
+                    height: 28px;
+                }
+                &.zoom_out-item{
+                    background-image: url('https://static.iviva.com/images/UXP_spaceworks/icon-map-zoom-out.svg');
+                    width: 17px;
+                }
+                &.zoom_in-item{
+                    background-image: url('https://static.iviva.com/images/UXP_spaceworks/icon-map-zoom-in.svg');
+                    width: 17px;
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+}
+
+.top-bar{
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    box-shadow: 0px 0px 4px #afafafc4;
+    border-radius: 10px;
+    /*margin: 1em 1em;*/
+    margin: 5em 4.5em;
+    position: relative;
+    
+    .top-bar-icon{
+        display: inline-block;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 60px;
+        height: 60px;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        
+        &.view-booking{
+            background-image: url('https://static.iviva.com./images/Adani_UXP/calendar_min_icon.png');
+        }
+    }
+    .top-bar-txt{
+        display: inline-block;
+        position: absolute;
+        bottom: -2.5em;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+
+ 
+    .lost_found-model.modal-container{  
+        .modal-panel {
+
+            .modal-header {
+                width: 100%;
+                height: auto;
+                padding: 20px;
+                display: inline-block;
+                flex-wrap: nowrap;
+                align-items: center;
+                justify-content: space-between;
+                border: none;
+                text-align: center;
+                position: relative;
+
+                .modal-title{
+                    font-size: 14px;
+                }
+
+                .modal-close{
+                    position: absolute;
+                    right: 10px;
+                    top: 10px; 
+
+                    .close-btn{
+                        width: 35px;
+                        height: 35px;
+                    }
+                }
+            }
+
+            .lost_found_search{
+                display: inline-block;
+                width: 100%;
+
+                .uxp-form-group{
+                    display: inline-block;
+                    width: 100%;
+                
+
+                    .uxp-search-box-container{
+                        display: inline-block;
+                        width: 100%;
+
+                        .search-box-container{
+                            // display: inline-block;
+                            border-radius: 10px;
+                            background-color: #eaeaea4a;
+                            width: 100%;
+                            padding: 10px 15px;
+                            box-sizing: border-box;
+                            font-size: 13px;
+                        }
+                    }
+
+                    label{
+                        display: inline-block;
+                        width: 100%;
+                        font-size: 13px;
+                    }
+            }
+
+            .lost_found_search-box{
+                display: inline-block;
+                width: 100%;
+
+                label{
+                    display: inline-block;
+                    width: 100%;
+                    font-size: 13px;
+                }
+
+                .serach-box{
+                    border-radius: 10px;
+                    background-color: #eaeaea4a;
+                    width: 70%;
+                    padding: 18px 15px;
+                    box-sizing: border-box;
+                    font-size: 15px;
+                    border: none;
+                    outline: none;
+                    font-family: "Comfortaa";
+                }
+
+                .search-section{
+                    display: inline-flex;
+                    width: 100%;
+
+                    p{
+                        font-size: 13px;
+                        display: inline-block;
+                        width: 15%;
+                        padding: 7px 0 0;
+                        text-align: center;
+                    }
+                    .raise-btn{
+                        display: inline-block;
+                        font-size: 15px;
+                        width: 15%;
+                        background: #e2e2e2;
+                        color: #808080;
+                        padding: 16px 0;
+
+                    }
+                }
+
+
+                .search-list{
+                    display: inline-block;
+
+                    li{
+                        display: inline-block;
+                        .search_pict{
+                            display: inline-block;
+                        }
+                        h6{
+                            display: inline-block;
+                        }
+                    }
+                }
+
+            }
+
+        }
+    }
+}  
+ 

@@ -1,0 +1,16 @@
+{
+    "id":"262aca7f-55d6-4c8b-9b78-3bda2a981951",
+    "author":"",
+    "widgets":[
+        {
+            "id":"spaceworks",
+            "title":"spaceworks",
+            "description":"A sample widget"
+        }
+    ],
+    "sidebarLinks":[
+        {
+            "id":"spaceworksLink"
+        }
+    ]
+}

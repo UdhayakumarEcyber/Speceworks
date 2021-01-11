@@ -1,15 +1,14 @@
 import * as React from "react";
-import { Button, DataList, Checkbox, SearchBox, WidgetWrapper, TitleBar, ItemListCard, FilterPanel, FormField, Label, Select, Input, Modal, ToggleFilter } from "uxp/components";
+import { Button, DataList, Checkbox, SearchBox, WidgetWrapper, DatePicker, TitleBar, ItemListCard, FilterPanel, FormField, Label, Select, Input, Modal, ToggleFilter } from "uxp/components";
 import { registerWidget, registerLink, IContextProvider, } from './uxp';
 
 import './styles.scss';
 
 //import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell, ComposedChart, } from 'recharts';
 
-
-import { Map, TileLayer, ImageOverlay,Marker, Rectangle, Polygon, Circle ,Tooltip} from 'react-leaflet';
-import { LatLngTuple, LatLngExpression, LeafletMouseEvent,CRS } from 'leaflet';
-
+import { MapComponent } from 'uxp/components'; 
+ 
+import App from './lost_found';
  
 const DATA = [
     { 
@@ -31,24 +30,28 @@ const DATA = [
         reported_time: "12:00 PM",
         location: "Rest Room",
         filter :"",
-        list_pict:"https://static.iviva.com/images/UXP_spaceworks/black-handbag.png"
+        list_pict:"https://static.iviva.com/images/UXP_spaceworks/black-suitcase.png"
     },
     { 
         category: "WATER BOTTLE IN THE PRAYER AREA",
         reported_time: "12:00 PM",
         location: "Prayer Area",
         filter :"",
-        list_pict:"https://static.iviva.com/images/UXP_spaceworks/black-handbag.png"
+        list_pict:"https://static.iviva.com/images/UXP_spaceworks/blue-bottle.png"
     }, 
     {
         category: "AMERICAN PASSPORTS FOUND IN THE PRAYER AREA",
         reported_time: "12:00 PM",
         location: "Prayer Area",
         filter :"",
-        list_pict:"https://static.iviva.com/images/UXP_spaceworks/black-handbag.png"
+        list_pict:"https://static.iviva.com/images/UXP_spaceworks/American-possport.png"
     }
 ];
+
+
   // datalist
+
+
   const renderItem = (item: any, key: number) => {
     return (<div className="list-item">
         <div className="category"><span><img src={item.list_pict} /> </span>{item.category}</div>
@@ -83,222 +86,90 @@ const getDataItems = (max: number, pageToken: string) => {
 }
 
 
-
-/*Map*/
-
-
-
-
-/**
- * Represents an individual marker
- * @example
- * {latitude:0,longitude:23.2,data:{'name':'FooBar'}}
- * 
- * @export
- */
-interface IMarker {
-    latitude: number,
-    longitude: number,
-    data?: any
-}
-/**
- * @exports
- */
-type regionType = "circle" | "rectangle" | "polygon"
-
-interface ICircleBound {
-    center: [number, number],
-    radius: number
-}
-/**
- * @export
- */
-type IPolygonBound = LatLngExpression[] | LatLngExpression[][];
-
-/**
- * @export
- * Region data for maps
- */
-interface IRegion {
-    type?: regionType, // default is polygon
-    bounds: IPolygonBound | ICircleBound,
-    hideStroke?: boolean,
-    color?: string,
-    fillColor?: string,
-    data?: any,
-    imageCoordinates?:boolean,
-    /**
-     * A tooltip to be shown when you click on the region
-     */
-    tooltipContent?:(data:any)=>JSX.Element;
-}
-
-/**
- * @export
- * A static image to load as the map.
- */
-interface IStaticImage {
-    /**
-     * The url of the image
-     */
-    url: string;
-    /**
-     * The width of the image in pixels
-     */
-    width: number;
-
-    /**
-     * The height of the image in pixels
-     */
-    height: number;
-}
-
-interface IMapComponentProps {
-    /**
-     * The url of the tile server that will serve up map tiles.
-     * This url should have the following placeholders in them:
-     * `{x}`, `{y}` and `{z}`
-     * 
-     * `{z}` represents the current zoom level
-     * 
-     * @example
-     * ```
-     * mapUrl="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-     * ```
-     */
-    mapUrl: string,
-
-    /**
-     * A static image to use instead of a map layout.
-     * If you are using a static image, specify `mapUrl` as an empty string.
-     * 
-     * The static image consists of a url for the image and a width and height of the image.
-     * Note that the width and height values  be relative - just that the ratio should be accurate.
-     * 
-     * @example
-     * ```
-     * staticImage={{url:'https://myserver/floor-plan.png',width:200,height:400}}
-     * ```
-     */
-    staticImage?: IStaticImage,
-
-    /**
-     * This handler gets called whenever a marker is clicked on.
-     * The first paramater represents the marker element that was clicked on.
-     * The second parameter represents the data associated with the marker
-     */
-    onMarkerClick: (el: any, data: any) => void
-
-    /**
-     * A list of markers to render.
-     * Each marker has a `latitutde` `longitude` and `data` field.
-     * The `data` field can store arbitrary data.
-     */
-    markers: IMarker[],
-
-    /**
-     * Where the map is centered.
-     */
-    center?: { position: IMarker, renderMarker?: boolean },
-    /**
-     * regions to show on map
-     */
-    regions?: IRegion[],
-    /**
-     * this handler will get called when a region is clicked
-     * 
-     */
-    onRegionClick?: (event: any, data: any) => void
-
-    /**
-     * The default zoom level to show on the map
-     */
-    zoom?: number,
-    /**
-     * this handler will get called when the map is clicked 
-     */
-    onClick?: (event: LeafletMouseEvent) => void
-}
-
-const getStaticImageBounds = (w:number,h:number) => {
-    return [[0,0],[h,w]] as [[number,number],[number,number]];
-    let lat = 0;
-    let lng= 0;
-    if (h > w) {
-        lat = 85;
-        lng = 180*w/h;
-    } else {
-        lng= 180;
-        lat= 85*h/w
-    }
-    return [[-lat,-lng],[lat,lng]]  as [[number,number],[number,number]];
-}
-
-const convertFromImagePosition = (x:number,y:number,w:number,h:number,bounds:[[number,number],[number,number]]):[number,number]  => {
-    return [h-y,x];
-    let lat = 0;
-    let lng = 0;
-    lng = bounds[0][1] + (bounds[1][1] - bounds[0][1])*x/w;
-    lat = bounds[1][0] - (bounds[1][0] - bounds[0][0])*y/h;
-    return [lat,lng];
-}
-
-/**
- * A map widget that can show a pannable/zoomable map with markers
- * @export
- * 
- */
-
-
-/*Map*/
-
-
  
 
 
-const TopBar: React.FunctionComponent<{}> = (props) => {   
+// const TopBar: React.FunctionComponent<{}> = (props) => {   
  
-    return <>
-        <WidgetWrapper>
-            <div id="top_Bar"> 
-             <div className="top-bar"> 
-                <div className="top-bar-icon view-booking"></div> 
-                <div className="top-bar-txt view-booking-txt">View Bookings</div> 
-             </div>  
-             </div>
+//     return <>
+//         <WidgetWrapper>
+//             <div id="top_Bar"> 
+//              <div className="top-bar"> 
+//                 <div className="top-bar-icon view-booking"></div> 
+//                 <div className="top-bar-txt view-booking-txt">View Bookings</div> 
+//              </div>  
+//              </div>
 
-        </WidgetWrapper>
+//         </WidgetWrapper>
 
-    </>
-} 
+//     </>
+// } 
  
 
+
+ 
  
 const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => { 
+
+//     constructor(){
+//       super();
+//       this.state={
+//           show:true
+//       }
+//   }
+    
     let [selected, setSelected] = React.useState<string | null>("op-1");
     let [inputValue, setInputValue] = React.useState<string | null>("");  
 
     let [toggleFilterValue, setToggleFilterValue] = React.useState<string>("lost");
+    let [checkedCheckState, setCheckedCheckState] = React.useState<boolean>(true);
+    let [defCheckState, setDefCheckState] = React.useState<boolean>(false);
 
+    let [showModal, setShowModal] = React.useState(false); 
+    let [date, setDate] = React.useState<Date>(new Date())
 
-    let [showModal, setShowModal] = React.useState(false);
+    
 
-    // const onClickSidebar = (e: React.MouseEvent<HTMLElement>) => {
-    //     let element = e.currentTarget;
-    //     let dataValue = element.dataset.value;
-
-    //     document.getElementById(dataValue).scrollIntoView({ "behavior": "smooth" })
-    // }
-
-    const people = [
-        "Siri",
-        "Alexa",
-        "Google",
-        "Facebook",
-        "Twitter",
-        "Linkedin",
-        "Sinkedin"
+    const people = [ 
+        "Black Suitcase found near the rest room",
+        "Black bag found near stairs",
+        "Red Shoe found hostel room",
+        "Book found in prayer Area",
+        "Pen found in near enterance",
+        "Blue handbag found in Prayer Area" 
       ];
+
+    // const people = [
+    //     { 
+    //         category: "BLACK HANDBAG FOUND NEAR THE ENTERANCE ",
+    //         reported_time: "12:00 PM",
+    //         location: "Enterance",
+    //         filter :"", 
+    //         list_pict:"https://static.iviva.com/images/UXP_spaceworks/black-handbag.png"
+    //     },
+    //     {
+    //         category: "BLACK HANDBAG FOUND NEAR THE ENTERANCE ",
+    //         reported_time: "12:00 PM",
+    //         location: "Enterance",
+    //         filter :"",
+    //         list_pict:"https://static.iviva.com/images/UXP_spaceworks/black-handbag.png"
+    //     },
+    //     {
+    //         category: "BLACK SUITCASE FOUND NEAR THE REST ROOM",
+    //         reported_time: "12:00 PM",
+    //         location: "Rest Room",
+    //         filter :"",
+    //         list_pict:"https://static.iviva.com/images/UXP_spaceworks/black-handbag.png"
+    //     },
+    //     { 
+    //         category: "WATER BOTTLE IN THE PRAYER AREA",
+    //         reported_time: "12:00 PM",
+    //         location: "Prayer Area",
+    //         filter :"",
+    //         list_pict:"https://static.iviva.com/images/UXP_spaceworks/black-handbag.png"
+    //     }
+
+    // ];  
       
     const [searchTerm, setSearchTerm] = React.useState("");
     const [searchResults, setSearchResults] = React.useState([]);
@@ -311,9 +182,59 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
         );
         setSearchResults(results);
     }, [searchTerm]);
+
+    const onChangeCheckbox = (checked: boolean) => {
+        setCheckedCheckState(checked)
+    }
+    const onChangeCheckboxDef = (checked: boolean) => {
+        setDefCheckState(checked);
+    } 
+
+
+
+
+
+    /*changes*/
+
+    const [isActive, setActive] = React.useState(false); 
+    const toggleClass = () => {
+        setActive(!isActive);
+      }; 
+
+
+    const [isActive1, setActive1] = React.useState(false); 
+    const toggleClass1 = () => {
+        setActive1(!isActive1);
+    }; 
+
+    const [isActive2, setActive2] = React.useState(false); 
+    const toggleClass2 = () => {
+        setActive2(!isActive2);
+    }; 
+
+    // const handleClickudhaya = () => {
+    //     handleDoubleClick();
+    //     toggleClass1();
+    //   }
     
+
+      var clicked = false;
+
+      function doSomething()
+     {
+        if(clicked)
+       {
+           toggleClass2();
+       }
+      else
+      {
+           toggleClass1();
+      }
+     clicked = !clicked;
+  }
  
     return <>
+     
         <WidgetWrapper>
 
             <TitleBar
@@ -334,19 +255,9 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
                     </div>
 
                     <div className="uti-sel-boxes">
-                        <div className="uti-sel-box sel-margin">
-                            <FormField inline className="showcase-input" backgroundColor="white">
-                                <Select
-                                    selected={selected}
-                                    options={[
-                                        { label: "Central Square", value: "op-1" },
-                                        { label: "Central Square 1", value: "op-2" },
-                                        { label: "Central Square 2", value: "op-3" },
-                                    ]}
-                                    onChange={(value) => { setSelected(value) }}
-                                    placeholder=" -- select --"
-                                />
-                            </FormField>
+                        <div className="uti-sel-box sel-margin"> 
+
+                            <button className="btn police-data-btn" onClick={() => setShowModal(true)}>Police Database</button>
                         </div>
 
                         <div className="uti-sel-box search-box">
@@ -364,8 +275,8 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
                                     selected={selected}
                                     options={[
                                         { label: "Al-Masjid an-Nabawi", value: "op-1" },
-                                        { label: "Floor 2", value: "op-2" },
-                                        { label: "Floor 3", value: "op-3" },
+                                        { label: "Al-Masjid an-Nabawi", value: "op-2" },
+                                        { label: "Al-Masjid an-Nabawi", value: "op-3" },
                                     ]}
                                     onChange={(value) => { setSelected(value) }}
                                     placeholder=" -- select --"
@@ -422,10 +333,10 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
                                     </div>
                                 </div>
                                 <div className="body">
- 
+                                
 
                                 <div className="lost_found_popup">
-                                    <button className="btn showcase" onClick={() => setShowModal(true)}>Modal</button>
+                                   
 
                                     <Modal className="lost_found-model"
                                         title = "LOST AND FOUND"
@@ -435,36 +346,197 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
                                         onClose={() => setShowModal(false)}
                                     >
 
-                                        <div className="lost_found_search">
-                                            {/* <FormField backgroundColor="white">
-                                                <label>Begin your Search</label>
-                                                <SearchBox
-                                                    value={inputValue}
-                                                    onChange={(newValue) => { setInputValue(newValue) }}
 
-                                                />
-                                            </FormField> */}
+ 
+
+                                        <div className="lost_found_search"> 
+
+                                            <div className={isActive ? 'lost_found_search-box1': "lost_found_search-box"}>
+
+                                                <label>Begin your Search</label>
+                                                    <div className="search-section">
+                                                        <input
+                                                            type="text"
+                                                            placeholder="A Block Bag"
+                                                            value={searchTerm}
+                                                            onChange={handleChange}
+                                                            className="serach-box"
+                                                        />
+
+                                                        <p>Not mine</p>
+                                                        {/* <button className="btn raise-btn">Raise a complaint</button> */}
+                                                        <input className="btn raise-btn" type="submit" value="Raise a complaint" onClick={toggleClass} /> 
+                                                    </div>
+
+                                                    <ul className={isActive ? 'search-list1': "search-list"} >
+                                                        {searchResults.map(item => (
+                                                        <li><div className="search_pict"></div><h6>{item}</h6></li>
+                                                        ))}
+                                                    </ul>  
+
+                                            </div>
+
+
+                                           
+
+
+                                            <div className={isActive ? 'found-details-section': "found-details-section1"}>
+
+                                            <div className="found-details">
+
+                                                <ul>
+                                                    <li>
+
+                                                        <div className="drog_drop">
+                                                            <p>Drop your file</p>
+                                                        </div>
+
+                                                    </li>
+                                                    <li>
+                                                        <div className="matching_terms">
+                                                            <FormField inline className="showcase-input" backgroundColor="white">
+                                                                <Label>Title</Label>
+                                                                <Input
+                                                                    type="text"
+                                                                    value={inputValue}
+                                                                    onChange={(value) => setInputValue(value)} 
+                                                                    placeholder="Input placeholder"
+                                                                />
+                                                            </FormField>
+                                                            <div className={isActive1 ? 'matching_terms-btns': "matching_terms-btns1"} >
+                                                                <p>Experience image AI found some matching terms.</p>
+                                                                <ul>
+                                                                    <li><button className="btn mobile-btn">Mobile phone</button></li>
+                                                                    <li><button className="btn streetmad-btn">Street Madinah</button></li>
+                                                                    <li><button className="btn watch-btn">Watch</button></li>
+                                                                    <li><button className="btn window-btn">Window</button></li>
+                                                                </ul>
+                                                            </div>
+
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                    <FormField inline className="showcase-input" backgroundColor="white">
+                                                            <Label>Item description</Label>
+                                                            <textarea className="form-control" id="exampleFormControlTextarea1"></textarea>
+                                                        </FormField>
+                                                        
+                                                    </li>
+                                                    <li>
+                                                        <ul>
+                                                            <li>
+                                                                <FormField inline className="showcase-input" backgroundColor="white">
+                                                                    <Label>Name</Label>
+                                                                    <Input
+                                                                        type="text"
+                                                                        value={inputValue}
+                                                                        onChange={(value) => setInputValue(value)} 
+                                                                        placeholder="Input placeholder"
+                                                                    />
+                                                                </FormField>
+                                                            </li>
+
+                                                            <li>
+                                                                <FormField inline className="showcase-input" backgroundColor="white">
+                                                                    <Label>Contact Number</Label>
+                                                                    <Input
+                                                                        type="number"
+                                                                        value={inputValue}
+                                                                        onChange={(value) => setInputValue(value)} 
+                                                                        placeholder="Input placeholder"
+                                                                    />
+                                                                </FormField>
+                                                            </li>
+                                                        </ul>
+
+                                                        <ul>
+                                                            <li>
+                                                                <FormField inline className="showcase-input" backgroundColor="white">
+                                                                    <Label>Location</Label>
+                                                                    <Select
+                                                                        selected={selected}
+                                                                        options={[
+                                                                            { label: "Facility one, West wing, Building 1", value: "op-1" },
+                                                                            { label: "Facility one, East wing, Building 1", value: "op-2" },
+                                                                            { label: "Facility one, North wing, Building 1", value: "op-3" },
+                                                                        ]}
+                                                                        onChange={(value) => { setSelected(value) }}
+                                                                        placeholder=" -- select --"
+                                                                    />
+                                                                </FormField>
+                                                            </li>
+
+                                                            <li> 
+                                                                <FormField inline className="showcase-input" backgroundColor="white">
+                                                                    <Label>Report Date</Label>
+                                                                    <DatePicker
+                                                                        title="Select Date"
+                                                                        date={date}
+                                                                        onChange={(date) => setDate(date)}
+                                                                    /> 
+                                                                 </FormField>
+                                                            </li>
+                                                        </ul>
+
+                                                        <ul>
+                                                            <li>
+                                                                <FormField inline className="showcase-input" backgroundColor="white">
+                                                                    <Label>Time Reported</Label>
+                                                                    <DatePicker
+                                                                    title="Select Date"
+                                                                    date={date}
+                                                                    onChange={(date) => setDate(date)}
+                                                                /> 
+                                                                </FormField>
+                                                            </li>
+
+                                                            <li className="last-item-reported">
+                                                            <FormField inline className="showcase-checkbox" backgroundColor="white"> 
+
+                                                                    <Label>Lost item reported</Label>
+                                                                    <Checkbox
+                                                                        onChange={onChangeCheckbox}
+                                                                        checked={checkedCheckState}
+                                                                        label=''
+                                                                        isValid
+                                                                    />
+                                                                    
+                                                                </FormField>
+                                                            </li>
+                                                            
+                                                        </ul>
+                                                    </li>
+                                                    
+                                                  </ul> 
+
+
+                                                    <div className="found-arrow" onClick={doSomething}></div>
+
+                                               </div>
+
+                                            </div>
+
+
+                                            <div className={isActive2 ? 'qr_code-section': 'qr_code-section1'} >
+
+                                                    <div className="qr-scan-code">
+                                                        <div className="qr-pict">
+
+                                                        </div>
+                                                        <button className="btn qr-btn">Print QR</button>
+
+                                                    </div>
+
+                                            </div>
+
+
                                         </div> 
 
-                                    </Modal>
-
-                                {/* <div className="App">
-                                    <input
-                                        type="text"
-                                        placeholder="Search"
-                                        value={searchTerm}
-                                        onChange={handleChange}
-                                    />
-                                    <ul>
-                                        {searchResults.map(item => (
-                                        <li>{item}</li>
-                                        ))}
-                                    </ul>
-                               </div> */}
+                                    </Modal> 
 
                                 </div> 
 
-
+                                
                             
                                     <DataList
                                         data={(max, last) => getDataItems(max, last)}
@@ -506,12 +578,12 @@ const ProfileCard: React.FunctionComponent<{}> = (props) => {
                     <h1>BLACK HANDBAG</h1>
                     <p>AT 12:30 PM</p>
                     <div className="profile-details-bot">
-                        <button className="btn profile-btn">Alert Team</button>
+                        <button className="btn alert-btn">Alert Team</button>
                         {/* <button className="btn profile-btn">View CCTV</button> */}
                         <Button className="btn profile-btn"
                                     title="View CCTV"
                                     onClick={() => alert("clicked")}
-                                    icon="https://static.iviva.com/images/Adani_UXP/QR_badge_icon.svg" 
+                                    icon="https://static.iviva.com/images/UXP_spaceworks/cctv-icon.png" 
                                 />
 
                     </div>
@@ -578,30 +650,30 @@ const AlmasjidWidget: React.FunctionComponent<{}> = (props) => {
                                     "hvac": { 
                                         "icon": "https://static.iviva.com/images/Adani_UXP/AC_min.png", 
                                         "top_label": 75,
-                                        "green_icon" : "https://static.iviva.com/images/top-green-arrow.png",
+                                        "green_icon" : "https://static.iviva.com/images/UXP_spaceworks/top-arrow.png",
                                         "bot_label": 25,
-                                        "red_icon" : "https://static.iviva.com/images/Maf_dashboard/down-arrow.svg" 
+                                        "red_icon" : "https://static.iviva.com/images/UXP_spaceworks/bottom-arrow.png" 
                                     },
                                     "lighting": {
                                         "icon": "https://static.iviva.com/images/Adani_UXP/AC_min.png", 
                                         "top_label": 75,
-                                        "green_icon" : "https://static.iviva.com/images/top-green-arrow.png",
+                                        "green_icon" : "https://static.iviva.com/images/UXP_spaceworks/top-arrow.png",
                                         "bot_label": 25,
-                                        "red_icon" : "https://static.iviva.com/images/Maf_dashboard/down-arrow.svg" 
+                                        "red_icon" : "https://static.iviva.com/images/UXP_spaceworks/bottom-arrow.png" 
                                     },
                                     "elevators": {
-                                        "icon": "https://static.iviva.com/images/Adani_UXP/AC_min.png",
+                                        "icon": "https://static.iviva.com/images/UXP_spaceworks/elevater.png",
                                         "top_label": 75,
-                                        "green_icon" : "https://static.iviva.com/images/top-green-arrow.png",
+                                        "green_icon" : "https://static.iviva.com/images/UXP_spaceworks/top-arrow.png",
                                         "bot_label": 25,
-                                        "red_icon" : "https://static.iviva.com/images/Maf_dashboard/down-arrow.svg" 
+                                        "red_icon" : "https://static.iviva.com/images/UXP_spaceworks/bottom-arrow.png" 
                                     },
                                     "fire alarm": {
                                         "icon": "https://static.iviva.com/images/Adani_UXP/AC_min.png",
                                         "top_label": 75,
-                                        "green_icon" : "https://static.iviva.com/images/top-green-arrow.png",
+                                        "green_icon" : "https://static.iviva.com/images/UXP_spaceworks/top-arrow.png",
                                         "bot_label": 25,
-                                        "red_icon" : "https://static.iviva.com/images/Maf_dashboard/down-arrow.svg" 
+                                        "red_icon" : "https://static.iviva.com/images/UXP_spaceworks/bottom-arrow.png" 
                                     }
                                 }}
                                  
@@ -649,9 +721,11 @@ const AlmasjidWidget: React.FunctionComponent<{}> = (props) => {
 
 
 
-//const MapWidget: React.FunctionComponent<{}> = (props) => { 
 
-    const MapComponent: React.FunctionComponent<IMapComponentProps> = (props) => {
+
+const MapWidget: React.FunctionComponent<{}> = (props) => { 
+
+    // const MapComponent: React.FunctionComponent<IMapComponentProps> = (props) => {
 
 
     let [defCheckState, setDefCheckState] = React.useState<boolean>(false);
@@ -665,38 +739,8 @@ const AlmasjidWidget: React.FunctionComponent<{}> = (props) => {
     }
 
    // props
-   let { mapUrl, markers, onMarkerClick, center, zoom, regions, onClick, onRegionClick } = props;
-
-   // get center
-   let _center: LatLngTuple = [1.290270, 103.851959];
-   let _renderCenter: boolean = false
-   if (center) {
-       _center = [center.position.latitude, center.position.longitude]
-       if (center.renderMarker) _renderCenter = center.renderMarker;
-   }
-   else {
-       if (markers.length > 0) {
-           _center = [markers[0].latitude, markers[0].longitude]
-       }
-   }
-
-   // zoom
-   let _zoom = 5;
-   if (zoom) _zoom = zoom;
-
-   const handleMarkerClick = (event: React.MouseEvent<Marker>, data: any) => {
-       onMarkerClick(event, data);
-   }
-
-   const handleRegionClick = (event: React.MouseEvent, data: any) => {
-       console.log("event : ", event)
-       console.log("data : ", data)
-       if(onRegionClick) onRegionClick(event, data);
-   }
-
-   const handleMapClick = (e: LeafletMouseEvent) => {
-       if(onClick) onClick(e);
-   }
+//    let { mapUrl, markers, onMarkerClick, center, zoom, regions, onClick, onRegionClick } = props;
+ 
 
 
     return <>
@@ -704,96 +748,31 @@ const AlmasjidWidget: React.FunctionComponent<{}> = (props) => {
 
             <div id="Map_Widget">  
 
-                 <div className="building_map">
+                 <div className="building_map"> 
 
-
-                 <Map 
-                            crs={props.staticImage?CRS.Simple:CRS.EPSG3857}
-                        
-                        id="uxp-map-component-container" 
-                        attributionControl={false}
-                        center={_center} zoom={_zoom} onclick={handleMapClick} >
-                            {/* base layer */}
-                            
-                            {
-                                
-                                <TileLayer url={mapUrl}  noWrap={true} />
+                 <MapComponent
+                    mapUrl="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    markers={[
+                        {
+                            latitude: 6.927079,
+                            longitude: 79.861244
+                        },
+                        {
+                            latitude: 1.290270,
+                            longitude: 103.851959,
+                            data: {
+                                name: "singapore"
                             }
-                            {
-                                props.staticImage?
-                                <ImageOverlay url={props.staticImage.url} bounds={getStaticImageBounds(props.staticImage.width,props.staticImage.height)} />
-                                :null
-                            }
+                        }
 
-                            {/* render markers */}
-                            {
-                                markers.map((marker: IMarker, key: number) => {
-                                    return <Marker
-                                        position={[marker.latitude, marker.longitude]}
-                                        onClick={(event: React.MouseEvent<Marker>) => handleMarkerClick(event, marker.data)}
-                                        key={key}
-                                    >
+                    ]}
+                    onMarkerClick={(el, data) => {
+                        console.log(el)
+                        console.log(data)
+                    }}
 
-                                    </Marker>
-                                })
-                            }
-
-                            {/* render center point */}
-                            {
-                                _renderCenter &&
-                                <Marker position={_center}></Marker>
-                            }
-
-                            {/* render regions */}
-                            {
-                                regions?.map((region: IRegion, key: number) => {
-                                    // get props
-                                    let regionProps: any = {};
-                                    if (region.hideStroke) {
-                                        regionProps.stroke = !region.hideStroke
-                                    }
-
-                                    if (region.color) {
-                                        regionProps.color = region.color
-                                    }
-
-                                    if (region.fillColor) {
-                                        regionProps.fillColor = region.fillColor
-                                    }
-
-                                    if (region.type) {
-                                        if (region.type == "circle") {
-                                            let bound = region.bounds;
-                                            if (bound.hasOwnProperty("center") && bound.hasOwnProperty("radius")) {
-                                                let _b = bound as ICircleBound;
-                                                return <Circle center={_b.center} radius={_b.radius}
-                                                    {...regionProps} key={key}
-                                                    onClick={(e: React.MouseEvent) => handleRegionClick(e, region.data)}
-                                                />
-                                            }
-                                        }
-                                        if (region.type == "rectangle") {
-                                            let _b = region.bounds as IPolygonBound;
-                                            return <Rectangle bounds={_b} {...regionProps} key={key}
-                                                onClick={(e: React.MouseEvent) => handleRegionClick(e, region.data)}
-                                            />
-                                        }
-                                    }
-
-                                    let _b = region.bounds as IPolygonBound;
-                                    if (region.imageCoordinates) {
-                                        let cb = getStaticImageBounds(props.staticImage.width,props.staticImage.height);
-                                        _b = (_b as [number,number][]).map(x => convertFromImagePosition(x[0],x[1],props.staticImage.width,props.staticImage.height,cb));
-                                    }
-                                    return <Polygon positions={_b} {...regionProps} key={key}
-                                        onClick={(e: React.MouseEvent) => handleRegionClick(e, region.data)}
-                                    >
-                                        {region.tooltipContent && <Tooltip>{region.tooltipContent(region.data)}</Tooltip>}
-                                    </Polygon>
-                                })
-                            }
-
-                        </Map>
+                />
+    
 
                      <div className="social-distancing-vilation">
                             <div className="social-distancing-sec">
@@ -831,16 +810,20 @@ const AlmasjidWidget: React.FunctionComponent<{}> = (props) => {
 } 
 
 
+<div id="footer">
+    <p>Powered by spaceworx.io</p>
+</div>
+
 
  
-registerWidget({
-    "id": "top_Bar",
-    "name": "TOP BAR",
-    "widget": TopBar,
-    "configs": {
+// registerWidget({
+//     "id": "top_Bar",
+//     "name": "TOP BAR",
+//     "widget": TopBar,
+//     "configs": {
         
-    }
-});
+//     }
+// });
  
 registerWidget({
     "id": "lostFound_Analytics",
@@ -869,7 +852,7 @@ registerWidget({
 registerWidget({
     "id": "Map_Widget",
     "name": "MAP WIDGET",
-    "widget": MapComponent,
+    "widget": MapWidget,
     "configs": {
         
     }

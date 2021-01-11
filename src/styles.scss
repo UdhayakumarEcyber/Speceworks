@@ -449,7 +449,7 @@ span.recharts-legend-item-text {
                     text-transform: capitalize;
 
                     &.selected{
-                        background-color: #ec4b7b;
+                        background-color: #7A6FF0;
                         color: #fff;
                     }
                 }
@@ -468,6 +468,24 @@ span.recharts-legend-item-text {
                 margin-left: 3%;
                     &.sel-margin{
                         margin: 0;
+                    }
+
+                    .police-data-btn{
+                        font-size: 12px;
+                        padding-top: 12px;
+                        padding-bottom: 12px;
+                        width: 100%;
+                        position: relative;
+                        &:before{
+                            width: 20px;
+                            height: 20px;
+                            content: "";
+                            background: url(https://static.iviva.com/images/UXP_spaceworks/database-icon.svg) no-repeat center center;
+                            position: absolute;
+                            left: 15px;
+                            top: 9px;
+                            background-size: contain; 
+                        }
                     }
 
                 .showcase-input{
@@ -730,6 +748,14 @@ span.recharts-legend-item-text {
                 color: #fff;
                 font-size: 12px;
             }
+            .alert-btn{
+                display: inline-block;
+                background: #605ae633;
+                color: #fff;
+                font-size: 12px;
+                padding: 12px 20px;
+                vertical-align: top;
+            }
             h5{
                 font-size: 1.2em;
                 margin: 15px 0 0 0;
@@ -931,6 +957,10 @@ span.recharts-legend-item-text {
         margin: 0em 0em;
         position: relative;
 
+        #uxp-map-component-container{
+            z-index: 0;
+        }
+
         .social-distancing-vilation{
             position: absolute;
             width: 30%;
@@ -938,6 +968,7 @@ span.recharts-legend-item-text {
             left: 2em;
             background-color: #fff;
             border-radius: 25px;
+            z-index: 1;
 
             .social-distancing-sec{
                 display: inline-flex;
@@ -946,6 +977,7 @@ span.recharts-legend-item-text {
                 padding-top: 8px;
                 padding: 10px 20px 10px 20px;
                 box-sizing: border-box;
+                font-family: "Comfortaa";
 
                 .social-distancing-sec-pict{
                     display: inline-block;
@@ -954,21 +986,24 @@ span.recharts-legend-item-text {
                     background: url('https://static.iviva.com/images/UXP_spaceworks/social-view-icon.svg') no-repeat center center; 
                 }
                 label{
-                    font-size: 12px;
+                    font-size: 14px;
                     padding: 8px 0 0 10px;
                     margin: 0;
                     width: 75%;
                 }
                 em{
-                    font-size: 15px;
+                    font-size: 22px;
                     font-style: normal;
-                    padding: 8px 0 0 0;
+                    padding: 3px 0 0 0;
                     margin: 0;
                 } 
             }
             .social-distancing-check{
                 display: inline-block;
-                font-size: 12px;
+               
+                label{
+                    font-size: 12px;
+                }
             } 
         }
 
@@ -981,6 +1016,8 @@ span.recharts-legend-item-text {
             background-color: #fff;
             border-radius: 25px;
             padding: 10px 20px 10px 20px;
+            z-index: 1;
+
             .map-item{
                 display: inline-block;
                 background-position: center center;
@@ -1059,6 +1096,7 @@ span.recharts-legend-item-text {
 
  
     .lost_found-model.modal-container{  
+      
         .modal-panel {
 
             .modal-header {
@@ -1089,9 +1127,17 @@ span.recharts-legend-item-text {
                 }
             }
 
+            .modal-body{
+                position: relative;
+            
+
             .lost_found_search{
+                // display: inline-block;
+                // width: 100%;
+
                 display: inline-block;
-                width: 100%;
+                width: 70%;
+                margin-left: 8%;
 
                 .uxp-form-group{
                     display: inline-block;
@@ -1123,6 +1169,7 @@ span.recharts-legend-item-text {
             .lost_found_search-box{
                 display: inline-block;
                 width: 100%;
+                 /*display: none;*/
 
                 label{
                     display: inline-block;
@@ -1155,33 +1202,251 @@ span.recharts-legend-item-text {
                     }
                     .raise-btn{
                         display: inline-block;
-                        font-size: 15px;
+                        font-size: 14px;
                         width: 15%;
-                        background: #e2e2e2;
-                        color: #808080;
-                        padding: 16px 0;
-
+                        background: #f3f3f3;
+                        color: #828282;
+                        padding: 16px 0; 
                     }
                 }
 
 
+                // .search-list1{
+                //     display: none;
+                // }
+
                 .search-list{
                     display: inline-block;
+                    width: 100%;
+
+                    
 
                     li{
                         display: inline-block;
+                        width: 30%;
+                        margin: 2em 0 0 0;
+
                         .search_pict{
                             display: inline-block;
+                            width: 100px;
+                            height: 100px;
+                            background: #e6e6e6ab;
                         }
                         h6{
                             display: inline-block;
+                            font-size: 12px;
+                            padding: 10px 0 0 0;
+                            margin: 0;
+                            width: 100%;
                         }
                     }
                 }
 
             }
 
+            .lost_found_search-box1{
+                display: none;
+            }
+
+            .found-details-section1{
+                display: none;
+            }
+            .found-details-section{
+                display: block;
+            }
+
+            .found-details{ 
+
+                ul{
+                    list-style: none;
+                    li{
+                        display: inline-block;
+                        width: 100%;
+                        vertical-align: top;
+
+                        .drog_drop{
+                            border: 1px dashed #dadada;
+                            display: inline-block;
+                            width: 98%;
+                            padding: 2em;
+                            margin: 0 1%;
+                            text-align: center;
+                            cursor: pointer;
+                            p{
+                                font-size: 13px;
+                            }
+                        }
+
+                        .matching_terms{
+                            position: relative; 
+
+                            .matching_terms-btns1{
+                                display: none;
+                            }
+
+                                .matching_terms-btns{
+                                    display: inline-block;
+                                    position: absolute;
+                                    top: 2.7em;
+                                    width: 300px;
+
+                                    p{
+                                        font-size: 10px;
+                                        color: #7A6FF0;
+                                    }
+                                    ul{
+                                        display: inline-flex;
+
+                                        li{
+                                            display: inline-block;
+                                            width: auto;
+                                            margin: 0 5px 0 0;
+
+                                            .btn{
+                                                display: inline-block;
+                                                font-size: 6px;
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                            }
+
+                        .uxp-form-group { 
+                            width: 100%!important;
+                        }
+
+                        ul{
+                            display: inline-block;
+                            width: 100%;
+                            padding: 0;
+                            li{
+                                display: inline-block;
+                                width: 50%;
+                            }
+                        } 
+
+                        lable{
+                            display: inline-block;
+                            width: 100%;
+                            font-size: 12px;
+                        }
+                        input, textarea{
+                            display: inline-block;
+                            width: 100%;
+                            font-size: 12px;
+                            font-family: "Comfortaa";
+                        }
+                        textarea{
+                            background: #f7f7f7;
+                            border: none;
+                            border-radius: 10px;
+                            padding: 10px;
+                            min-height: 100px;
+                            font-size: 13px;
+                            outline: none;
+                        }
+                        .uxp-form-select .uxp-select-placeholder.dynamic-select {
+                            position: relative;
+                            background: #f7f7f7;
+                        }
+                        .uxp-date-time-picker-container{
+                            background: #f7f7f7;
+                            padding: 5px 10px;
+                            box-shadow: none;
+                        }
+                    }
+                }
+
+                .found-arrow{
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    right: 20px;
+                    cursor: pointer;
+                    height: 35px;
+                    background-image: url(https://static.iviva.com/images/UXP_spaceworks/rht-arrow-sub.svg);
+                    background-position: center center;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    width: 40px;
+                }
+
+            }
+
+            .qr_code-section1{
+                display: none;
+            }
+
+            .qr_code-section{
+                display: inline-block;
+                width: 300px;
+                border: 1px solid #ddd;
+                position: absolute;
+                top: 14px;
+                right: 1em;
+                // height: 100%;
+                height: 95vh;
+                border-radius: 10px;
+
+                .qr-scan-code{
+                    display: inline-block;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+
+                    .qr-pict{
+                        display: inline-block;
+                        width: 100%;
+                        height: 100px;
+                        background-image: url(https://static.iviva.com/images/UXP_spaceworks/QR-code.png);
+                        background-position: center center;
+                        background-repeat: no-repeat;
+                        background-size: contain;
+
+                    }
+                    .qr-btn{
+                        display: inline-block;
+                        margin-top: 1em;
+
+                        }
+                    }
+                }
+
+                .last-item-reported{
+                    display: inline-block;
+                    .uxp-form-group{
+                        display: inline-flex;
+                        margin-top: 2.5em;
+
+                        label{
+                            width: 50%;
+                            margin-top: 0.7em;
+                        }
+                        .uxp-form-checkbox{
+                            width: 30%;
+                            margin-top: -10px;   
+                        }
+                    }
+                    
+
+                }
+            }
         }
     }
 }  
  
+
+#footer{
+    display: inline-block;
+    width: 100%;
+    p{
+        font-size: 12px;
+    }
+}
+
+
+.search-list1{
+
+}

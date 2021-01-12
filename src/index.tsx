@@ -8,8 +8,7 @@ import './styles.scss';
 
 import { MapComponent } from 'uxp/components'; 
  
-import App from './lost_found';
- 
+
 const DATA = [
     { 
         category: "BLACK HANDBAG FOUND NEAR THE ENTERANCE ",
@@ -139,6 +138,25 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
         "Blue handbag found in Prayer Area" 
       ];
 
+    //   var people = {
+    //     items:  [{
+    //       name: 'Eric Cartman',
+    //       tags: ['male', 'child']
+    //     },{
+    //       name: 'Wendy Testaburger',
+    //       tags: ['female', 'child']
+    //     },{
+    //       name: 'Randy Marsh',
+    //       tags: ['male']
+    //     },{
+    //       name: 'Butters Stotch',
+    //       tags: ['male', 'blonde', 'child']
+    //     },{
+    //       name: 'Bebe Stevens',
+    //       tags: ['female', 'blonde', 'child']
+    //     }]
+    //   };
+
     // const people = [
     //     { 
     //         category: "BLACK HANDBAG FOUND NEAR THE ENTERANCE ",
@@ -177,7 +195,7 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
         setSearchTerm(e.target.value);
     };
     React.useEffect(() => {
-        const results = people.filter(person =>
+        const results = people.filter((person: string) =>
         person.toLowerCase().includes(searchTerm)
         );
         setSearchResults(results);
@@ -200,43 +218,61 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
     const toggleClass = () => {
         setActive(!isActive);
       }; 
+ 
+
+ 
 
 
-    const [isActive1, setActive1] = React.useState(false); 
-    const toggleClass1 = () => {
-        setActive1(!isActive1);
-    }; 
-
-    const [isActive2, setActive2] = React.useState(false); 
-    const toggleClass2 = () => {
-        setActive2(!isActive2);
-    }; 
-
-    // const handleClickudhaya = () => {
-    //     handleDoubleClick();
-    //     toggleClass1();
-    //   }
+    let className = 'qr_code-section1';  
     
+    const [isActive12, setActive12] = React.useState(false); 
+    const QRcode = () => {
+        setActive12(!isActive12);
+    }; 
+
+    if (isActive12) {
+        className += ' qr_code-section';
+    } 
+
+    let className1 = 'matching_terms-btns1';  
+    
+    const [isActive13, setActive13] = React.useState(false); 
+    const matchingTermsShow = () => {
+        setActive13(!isActive13);
+    }; 
+
+    if (isActive13) {
+        className1 += ' matching_terms-btns';
+    } 
+
 
       var clicked = false;
 
-      function doSomething()
+      function QRcode_matching_terms()
      {
         if(clicked)
-       {
-           toggleClass2();
+       { 
+       // QRcode(); 
+          matchingTermsShow(); 
        }
+      
       else
       {
-           toggleClass1();
+        QRcode(); 
+       //  matchingTermsShow(); 
       }
      clicked = !clicked;
   }
+
+ 
+    
  
     return <>
+ 
      
         <WidgetWrapper>
 
+       
             <TitleBar
                 icon='https://static.iviva.com/images/Adani_UXP/users.svg'
                 title='LOST AND FOUND' >
@@ -351,6 +387,8 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
 
                                         <div className="lost_found_search"> 
 
+                                        <div className="modal-back"><span className="modal-back-icon"></span>Home</div>
+
                                             <div className={isActive ? 'lost_found_search-box1': "lost_found_search-box"}>
 
                                                 <label>Begin your Search</label>
@@ -403,7 +441,7 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
                                                                     placeholder="Input placeholder"
                                                                 />
                                                             </FormField>
-                                                            <div className={isActive1 ? 'matching_terms-btns': "matching_terms-btns1"} >
+                                                            <div className={className1} onClick={matchingTermsShow}>
                                                                 <p>Experience image AI found some matching terms.</p>
                                                                 <ul>
                                                                     <li><button className="btn mobile-btn">Mobile phone</button></li>
@@ -510,14 +548,14 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
                                                   </ul> 
 
 
-                                                    <div className="found-arrow" onClick={doSomething}></div>
+                                                    <div className="found-arrow" onClick={QRcode_matching_terms}></div>
 
                                                </div>
 
                                             </div>
 
 
-                                            <div className={isActive2 ? 'qr_code-section': 'qr_code-section1'} >
+                                            <div className={className} onClick={QRcode} >
 
                                                     <div className="qr-scan-code">
                                                         <div className="qr-pict">
@@ -561,7 +599,7 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
 
 
  
-const ProfileCard: React.FunctionComponent<{}> = (props) => { 
+ const ProfileCard: React.FunctionComponent<{}> = (props) => {
  
     return <>
         <WidgetWrapper>
@@ -579,12 +617,14 @@ const ProfileCard: React.FunctionComponent<{}> = (props) => {
                     <p>AT 12:30 PM</p>
                     <div className="profile-details-bot">
                         <button className="btn alert-btn">Alert Team</button>
+                        
                         {/* <button className="btn profile-btn">View CCTV</button> */}
+                        
                         <Button className="btn profile-btn"
-                                    title="View CCTV"
-                                    onClick={() => alert("clicked")}
-                                    icon="https://static.iviva.com/images/UXP_spaceworks/cctv-icon.png" 
-                                />
+                            title="View CCTV"
+                            onClick={() => alert("clicked")}
+                            icon="https://static.iviva.com/images/UXP_spaceworks/cctv-icon.png" 
+                        />
 
                     </div>
                 </div>
@@ -655,7 +695,7 @@ const AlmasjidWidget: React.FunctionComponent<{}> = (props) => {
                                         "red_icon" : "https://static.iviva.com/images/UXP_spaceworks/bottom-arrow.png" 
                                     },
                                     "lighting": {
-                                        "icon": "https://static.iviva.com/images/Adani_UXP/AC_min.png", 
+                                        "icon": "https://static.iviva.com/images/UXP_spaceworks/light.svg", 
                                         "top_label": 75,
                                         "green_icon" : "https://static.iviva.com/images/UXP_spaceworks/top-arrow.png",
                                         "bot_label": 25,
@@ -669,7 +709,7 @@ const AlmasjidWidget: React.FunctionComponent<{}> = (props) => {
                                         "red_icon" : "https://static.iviva.com/images/UXP_spaceworks/bottom-arrow.png" 
                                     },
                                     "fire alarm": {
-                                        "icon": "https://static.iviva.com/images/Adani_UXP/AC_min.png",
+                                        "icon": "https://static.iviva.com/images/UXP_spaceworks/Fire_Alarm.svg",
                                         "top_label": 75,
                                         "green_icon" : "https://static.iviva.com/images/UXP_spaceworks/top-arrow.png",
                                         "bot_label": 25,
@@ -857,35 +897,4 @@ registerWidget({
         
     }
 });
-
-// registerWidget({
-//     "id": "efficiencyAnalytics",
-//     "name": "Efficiency Analytics",
-//     "widget": EfficiencyAnalytics,
-//     "configs": {
-
-//     }
-// }); 
-
-
-
-// registerWidget({
-//     "id": "utilisationAnalytics",
-//     "name": "UTILISATION ANALYTICS",
-//     "widget": Utilisation_Analytics,
-//     "configs": {
-//         "container": {
-//             "background": "white"
-//         }
-//     }
-// });
-
-
-// registerWidget({
-//     "id": "efficiencyAnalytics",
-//     "name": "Efficiency Analytics",
-//     "widget": EfficiencyAnalytics,
-//     "configs": {
-
-//     }
-// });
+ 

@@ -1156,9 +1156,22 @@ span.recharts-legend-item-text {
 
                 .modal-back{
                     display: inline-block;
-                    
+                    position: absolute;
+                    left: 3em;
+                    top: 0em;
+
                     span.modal-back-icon{
-                        display: inline-block;
+                            position: absolute;
+                            cursor: pointer;
+                            height: 20px;
+                            background-image: url(https://static.iviva.com/images/UXP_spaceworks/rht-arrow-sub.svg);
+                            background-position: center center;
+                            background-repeat: no-repeat;
+                            background-size: contain;
+                            width: 25px;
+                            transform: rotate(180deg);
+                            top: -3px;
+                            left: -32px;
                     }
                 }
 

@@ -7,6 +7,7 @@ import './styles.scss';
 //import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell, ComposedChart, } from 'recharts';
 
 import { MapComponent } from 'uxp/components'; 
+import { render } from "react-dom";
  
 
 const DATA = [
@@ -59,16 +60,6 @@ const DATA = [
         <div className="filter">{item.filter}</div> 
     </div>)
 }
-
-// const renderGridItem = (item: any, key: number) => {
-//     return (<ItemCard
-//         item={item}
-//         imageField="icon"
-//         titleField="title"
-//         subTitleField="subTitle"
-//         nameField="name"
-//     />)
-// }
  
 const getDataItems = (max: number, pageToken: string) => {
     let last = 0
@@ -83,10 +74,7 @@ const getDataItems = (max: number, pageToken: string) => {
 
     return p;
 }
-
-
- 
-
+  
 
 // const TopBar: React.FunctionComponent<{}> = (props) => {   
  
@@ -109,14 +97,7 @@ const getDataItems = (max: number, pageToken: string) => {
  
  
 const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => { 
-
-//     constructor(){
-//       super();
-//       this.state={
-//           show:true
-//       }
-//   }
-    
+ 
     let [selected, setSelected] = React.useState<string | null>("op-1");
     let [inputValue, setInputValue] = React.useState<string | null>("");  
 
@@ -129,99 +110,66 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
 
     
 
-    const people = [ 
-        "Black Suitcase found near the rest room",
-        "Black bag found near stairs",
-        "Red Shoe found hostel room",
-        "Book found in prayer Area",
-        "Pen found in near enterance",
-        "Blue handbag found in Prayer Area" 
-      ];
+    // const people = [   
+    //     "Black Suitcase found near the rest room",
+    //     "Black bag found near stairs",
+    //     "Red Shoe found hostel room",
+    //     "Book found in prayer Area",
+    //     "Pen found in near enterance",
+    //     "Blue handbag found in Prayer Area"  
+    //   ];
 
-    //   var people = {
-    //     items:  [{
-    //       name: 'Eric Cartman',
-    //       tags: ['male', 'child']
-    //     },{
-    //       name: 'Wendy Testaburger',
-    //       tags: ['female', 'child']
-    //     },{
-    //       name: 'Randy Marsh',
-    //       tags: ['male']
-    //     },{
-    //       name: 'Butters Stotch',
-    //       tags: ['male', 'blonde', 'child']
-    //     },{
-    //       name: 'Bebe Stevens',
-    //       tags: ['female', 'blonde', 'child']
-    //     }]
-    //   };
 
-    // const people = [
-    //     { 
-    //         category: "BLACK HANDBAG FOUND NEAR THE ENTERANCE ",
-    //         reported_time: "12:00 PM",
-    //         location: "Enterance",
-    //         filter :"", 
-    //         list_pict:"https://static.iviva.com/images/UXP_spaceworks/black-handbag.png"
-    //     },
-    //     {
-    //         category: "BLACK HANDBAG FOUND NEAR THE ENTERANCE ",
-    //         reported_time: "12:00 PM",
-    //         location: "Enterance",
-    //         filter :"",
-    //         list_pict:"https://static.iviva.com/images/UXP_spaceworks/black-handbag.png"
-    //     },
-    //     {
-    //         category: "BLACK SUITCASE FOUND NEAR THE REST ROOM",
-    //         reported_time: "12:00 PM",
-    //         location: "Rest Room",
-    //         filter :"",
-    //         list_pict:"https://static.iviva.com/images/UXP_spaceworks/black-handbag.png"
-    //     },
-    //     { 
-    //         category: "WATER BOTTLE IN THE PRAYER AREA",
-    //         reported_time: "12:00 PM",
-    //         location: "Prayer Area",
-    //         filter :"",
-    //         list_pict:"https://static.iviva.com/images/UXP_spaceworks/black-handbag.png"
-    //     }
-
-    // ];  
+      const data_list = [
+        {
+            "Icon": "https://static.iviva.com/images/UXP_spaceworks/black-suitcase.png", 
+            "Name": "Black Suitcase found in the enterance",
+            "Time": "12:00 PM" 
+        },
+        {
+            "Icon": "https://static.iviva.com/images/UXP_spaceworks/black-handbag.png", 
+            "Name": "Black Handbag found near the enterance",
+            "Time": "02:00 PM"  
+        },
+        {
+            "Icon": "https://static.iviva.com/images/UXP_spaceworks/blue-bottle.png", 
+            "Name": "Water Bottle found in the playing Area",
+            "Time": "10:00 AM"  
+        },
+        {
+            "Icon": "https://static.iviva.com/images/UXP_spaceworks/American-possport.png", 
+            "Name": "American Passport found in the prayer area",
+            "Time": "08:00 AM"  
+        } 
+      ]; 
+  
       
     const [searchTerm, setSearchTerm] = React.useState("");
     const [searchResults, setSearchResults] = React.useState([]);
     const handleChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
         setSearchTerm(e.target.value);
     };
-    React.useEffect(() => {
-        const results = people.filter((person: string) =>
-        person.toLowerCase().includes(searchTerm)
+
+    () => {
+        const results = people.filter(person =>
+          person.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setSearchResults(results);
-    }, [searchTerm]);
+      }
 
     const onChangeCheckbox = (checked: boolean) => {
         setCheckedCheckState(checked)
     }
     const onChangeCheckboxDef = (checked: boolean) => {
         setDefCheckState(checked);
-    } 
-
-
-
-
+    }  
 
     /*changes*/
 
     const [isActive, setActive] = React.useState(false); 
     const toggleClass = () => {
         setActive(!isActive);
-      }; 
- 
-
- 
-
+      };  
 
     let className = 'qr_code-section1';  
     
@@ -264,17 +212,14 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
      clicked = !clicked;
   }
 
+  
  
-    
- 
-    return <>
- 
+    return <> 
      
-        <WidgetWrapper>
-
+        <WidgetWrapper> 
        
-            <TitleBar
-                icon='https://static.iviva.com/images/Adani_UXP/users.svg'
+            <TitleBar className="lost_found-title"
+                icon='https://static.iviva.com/images/UXP_spaceworks/open-box.svg'
                 title='LOST AND FOUND' >
 
                 <div className="uti-analytics_rht">
@@ -380,14 +325,13 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
                                         show={showModal}
                                         onOpen={() => { }}
                                         onClose={() => setShowModal(false)}
-                                    >
-
-
- 
+                                    > 
 
                                         <div className="lost_found_search"> 
 
-                                        <div className="modal-back"><span className="modal-back-icon"></span>Home</div>
+                                          <div className="modal-back" onClick={() => setShowModal(false)} ><span className="modal-back-icon"></span>Home</div>
+
+                                          <div className="lost_found_overall">
 
                                             <div className={isActive ? 'lost_found_search-box1': "lost_found_search-box"}>
 
@@ -405,20 +349,39 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
                                                         {/* <button className="btn raise-btn">Raise a complaint</button> */}
                                                         <input className="btn raise-btn" type="submit" value="Raise a complaint" onClick={toggleClass} /> 
                                                     </div>
+ 
 
-                                                    <ul className={isActive ? 'search-list1': "search-list"} >
+                                                    <div  className={isActive ? 'search-list1': "search-list"}>   
+                                                        <ul>
+                                                            {data_list.map(item => (
+                                                                
+                                                                <li key={item.Icon}>
+
+                                                                    <div className="search_pict">
+                                                                        <img src={item.Icon} />
+                                                                        <span className="found-time">{item.Time}</span>
+                                                                    </div>
+
+                                                                    <h6>{item.Name}</h6> 
+                                                                </li>  
+                                                             ))}
+                                                        </ul> 
+                                                    </div>
+
+                                                    {/* <ul className={isActive ? 'search-list1': "search-list"} >
                                                         {searchResults.map(item => (
-                                                        <li><div className="search_pict"></div><h6>{item}</h6></li>
-                                                        ))}
-                                                    </ul>  
+                                                            
+                                                        
+
+                                                        <li><div className="search_pict"></div><h6>{item}</h6></li> 
+
+                                                        ))} 
+
+                                                    </ul>   */}
 
                                             </div>
 
-
-                                           
-
-
-                                            <div className={isActive ? 'found-details-section': "found-details-section1"}>
+                                             <div className={isActive ? 'found-details-section': "found-details-section1"}>
 
                                             <div className="found-details">
 
@@ -555,7 +518,7 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
                                             </div>
 
 
-                                            <div className={className} onClick={QRcode} >
+                                             <div className={className} onClick={QRcode} >
 
                                                     <div className="qr-scan-code">
                                                         <div className="qr-pict">
@@ -567,16 +530,15 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
 
                                             </div>
 
+                                            </div>
 
                                         </div> 
 
                                     </Modal> 
 
-                                </div> 
-
-                                
+                                </div>  
                             
-                                    <DataList
+                                    <DataList className="has-no-footer"
                                         data={(max, last) => getDataItems(max, last)}
                                         renderItem={renderItem}
                                         pageSize={10}
@@ -603,7 +565,11 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
  
     return <>
         <WidgetWrapper>
-            <div id="profile_Card"> 
+
+        <TitleBar title='' className="profile-title"> </TitleBar>  
+ 
+
+            <div id="profile_Card">  
 
             <div className="profile-lft">
                 <div className="profile-pict"></div>
@@ -641,19 +607,7 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
 
 const AlmasjidWidget: React.FunctionComponent<{}> = (props) => { 
     let [selected, setSelected] = React.useState<string | null>("op-1");
-    // let [inputValue, setInputValue] = React.useState<string | null>(""); 
-    // let [defCheckState, setDefCheckState] = React.useState<boolean>(false);
-    // const onChangeCheckboxDef = (checked: boolean) => {
-    //     setDefCheckState(checked);
-    // }
-
-   // let [toggleFilterValue, setToggleFilterValue] = React.useState<string>("lost");
-
-        //   const slide_button_lft = document.getElementById('Almas_lft_arrow'); 
-
-        //   slide_button_lft.onclick = function () {
-        //     document.getElementById('almasjidWidget').scrollLeft -= 100;
-        //   };
+   
 
     return <>
         <WidgetWrapper>
@@ -785,6 +739,8 @@ const MapWidget: React.FunctionComponent<{}> = (props) => {
 
     return <>
         <WidgetWrapper> 
+
+        <TitleBar title='' className="map-title"> </TitleBar>  
 
             <div id="Map_Widget">  
 

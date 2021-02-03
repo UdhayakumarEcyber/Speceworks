@@ -1,3 +1,4 @@
+ 
 .lost_found-section{
     display: inline-block;
     width: 100%;
@@ -9,6 +10,34 @@
         display: inline-block;
         width: 100%;
         height: 100%;
+
+        .data-list-container{
+
+            .data-list{
+                border-top: 1px solid #eaeaea8a;
+          
+
+            .data-list-item{
+
+                border: none;
+
+                &:nth-child(even){  
+                    .list-item { 
+                        background-color: #d8d8d816;
+                    }
+
+                }
+           
+
+                .list-item { 
+                    padding: 15px 20px;
+                }
+            }
+        }
+
+        }
+
+        
 
         .technician_chart{
             display: inline-block;
@@ -35,10 +64,21 @@
 
         .lost_found-table{
 
+            .header{
+                .list-item{
+                    padding: 10px 20px;
+
+                    .category, .reported_time, .location{
+                        padding-top: 10px;
+                    }
+                }
+            }
+
             .list-item{
                 .category{
                     display: inline-block;
                     width: 60%;
+                   
                     span{
                         display: inline-block;
                         width: 40px;
@@ -54,10 +94,12 @@
                 .reported_time{
                     display: inline-block;
                     width: 17%;
+                    padding-top: 12px;
                 }
                 .location{
                     display: inline-block;
                     width: 17%;
+                    padding-top: 12px;
                 }
                 .filter{
                     display: inline-block;
@@ -110,6 +152,25 @@
             }
         }
     } 
+}
+
+.lost_found-title{
+    border-bottom: 1px solid #dedede;
+    padding: 36px 10px;
+
+    .title-section{
+        .title-icon{
+            background-size: contain;
+            filter: grayscale(1);
+            opacity: 0.7;
+            width: 25px;
+            height: 25px;
+        }
+    }
+
+    .uti-analytics_rht {
+        margin-top: 0.5em;
+    }
 }
 span.recharts-legend-item-text {
     font-size: 10px;
@@ -418,7 +479,7 @@ span.recharts-legend-item-text {
 
 .uti-analytics_rht{
     display: inline-block;
-    margin-top: 2.5em;
+    margin-top: 0em;
     margin-left: 3em;
     width: 100%;
 
@@ -485,6 +546,7 @@ span.recharts-legend-item-text {
                             left: 15px;
                             top: 9px;
                             background-size: contain; 
+                            opacity: 0.3;
                         }
                     }
 
@@ -700,9 +762,26 @@ span.recharts-legend-item-text {
 } 
 
 #lostFound_Analytics{ 
-    display: inline-block;
-
+    display: inline-block; 
 }
+
+
+.widget-container-block .layout .layout-item{
+    min-width: 468px;
+    max-width: 100%;
+    width: 468px;
+}
+
+// .profile-title{
+//     height: 0px;
+//     padding: 0;
+//     background: transparent;
+// }
+ 
+
+.profile-title[--parent] {
+    border: 10px dashed purple;
+  }
 
 #profile_Card{ 
     background: #f8ba7b; /* Old browsers */
@@ -712,18 +791,21 @@ span.recharts-legend-item-text {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8ba7b', endColorstr='#605ae6',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
     height: 100%;
     padding-top: 5em;
+    min-width: 468px;
+    max-width: 100%;
+    width: 468px;
 
     .item-card{
         background: transparent;
     }
     .profile-lft{
         display: inline-block;
-        width: 35%;
+        width: 33%;
         text-align: center;
         .profile-pict{
             display: inline-block;
-            width: 150px;
-            height: 150px;
+            width: 135px;
+            height: 135px;
             background: #fff;
             border-radius: 50%;
             background-image: url('https://static.iviva.com/images/UXP_spaceworks/black-handbag.png');
@@ -734,8 +816,8 @@ span.recharts-legend-item-text {
     }
     .profile-rgt{
         display: inline-block;
-        width: 60%;
-        margin-left: 5%;
+        width: 64%;
+        margin-left: 3%;
         position: relative; 
         height: 92%;
 
@@ -802,7 +884,7 @@ span.recharts-legend-item-text {
     .uxp-item-list-card{
         overflow-y: auto;
         width: 93%; 
-        height: 95%;
+        height: 100%;
         overflow-x: auto;
         margin-left: 2%;
         overflow-y: hidden;
@@ -816,7 +898,7 @@ span.recharts-legend-item-text {
             display: inline-flex;
             width: 130%;
             overflow: hidden;
-            padding: 20px 15px;
+            padding: 10px 15px;
 
             .box {
                 background:#dadada61;
@@ -1101,6 +1183,7 @@ span.recharts-legend-item-text {
     .lost_found-model.modal-container{  
       
         .modal-panel {
+            min-height: 75%;
 
             .modal-header {
                 width: 100%;
@@ -1121,11 +1204,13 @@ span.recharts-legend-item-text {
                         width: 30px;
                         height: 30px;
                         content: "";
-                        background: url(https://static.iviva.com/images/UXP_spaceworks/drop-box.png) no-repeat center center;
+                        background: url(https://static.iviva.com/images/UXP_spaceworks/open-box.svg) no-repeat center center;
                         position: absolute;
                         top: -10px;
                         background-size: contain;
                         transform: translate(-115%, 0%);
+                        filter: grayscale(1);
+                        opacity: 0.7;
                     }
 
                 }
@@ -1144,6 +1229,7 @@ span.recharts-legend-item-text {
 
             .modal-body{
                 position: relative;
+                overflow: hidden;
             
 
             .lost_found_search{
@@ -1151,7 +1237,7 @@ span.recharts-legend-item-text {
                 // width: 100%;
 
                 display: inline-block;
-                width: 70%;
+                width: 80%;
                 margin-left: 8%;
 
                 .modal-back{
@@ -1159,6 +1245,7 @@ span.recharts-legend-item-text {
                     position: absolute;
                     left: 6em;
                     top: 0em;
+                    cursor: pointer;
 
                     span.modal-back-icon{
                             position: absolute;
@@ -1175,30 +1262,42 @@ span.recharts-legend-item-text {
                     }
                 }
 
-                .uxp-form-group{
-                    display: inline-block;
-                    width: 100%;
-                
+                .lost_found_overall{
 
-                    .uxp-search-box-container{
+                    width: 100%;
+                    height: auto;
+                    min-height: 10vh;
+                    max-height: 98vh;
+                    // overflow-y: auto;
+                    // overflow-x: hidden;
+                    
+               
+
+                    .uxp-form-group{
                         display: inline-block;
                         width: 100%;
+                    
 
-                        .search-box-container{
-                            // display: inline-block;
-                            border-radius: 10px;
-                            background-color: #eaeaea4a;
+                        .uxp-search-box-container{
+                            display: inline-block;
                             width: 100%;
-                            padding: 10px 15px;
-                            box-sizing: border-box;
+
+                            .search-box-container{
+                                // display: inline-block;
+                                border-radius: 10px;
+                                background-color: #eaeaea4a;
+                                width: 100%;
+                                padding: 10px 15px;
+                                box-sizing: border-box;
+                                font-size: 13px;
+                            }
+                        }
+
+                        label{
+                            display: inline-block;
+                            width: 100%;
                             font-size: 13px;
                         }
-                    }
-
-                    label{
-                        display: inline-block;
-                        width: 100%;
-                        font-size: 13px;
                     }
             }
 
@@ -1243,6 +1342,21 @@ span.recharts-legend-item-text {
                         background: #f3f3f3;
                         color: #828282;
                         padding: 16px 0; 
+
+                        &:after{
+                            content: '';
+                            position: absolute;
+                                cursor: pointer;
+                                height: 20px;
+                                background-image: url(https://static.iviva.com/images/UXP_spaceworks/rht-arrow-sub.svg);
+                                background-position: center center;
+                                background-repeat: no-repeat;
+                                background-size: contain;
+                                width: 25px;
+                                transform: rotate(180deg);
+                                top: -3px;
+                                left: -32px
+                        }
                     }
                 }
 
@@ -1253,27 +1367,90 @@ span.recharts-legend-item-text {
 
                 .search-list{
                     display: inline-block;
+                    padding-left: 10px;
                     width: 100%;
+                    height: auto;
+                    min-height: 60vh;
+                    max-height: 98vh;
+                    overflow-y: auto;
+                    overflow-x: hidden;
+                   
 
-                    
-
-                    li{
-                        display: inline-block;
-                        width: 30%;
-                        margin: 2em 0 0 0;
-
-                        .search_pict{
-                            display: inline-block;
-                            width: 100px;
-                            height: 100px;
-                            background: #e6e6e6ab;
+                    .uxp-item-list-card{
+                        background: transparent;
+                        .header{
+                            display: none;
                         }
-                        h6{
+                        .body{
+                            padding: 0px 0px;
+                        }
+                    }
+
+                    ul{
+                        display: inline-block;
+                        width: 100%;
+                        height: 100%;
+                        min-height: 90vh;
+                        max-height: 95vh;
+                     
+
+                        li{
+
                             display: inline-block;
-                            font-size: 12px;
-                            padding: 10px 0 0 0;
-                            margin: 0;
-                            width: 100%;
+                            width: 23%;
+                            margin: 2em 0 0 0;
+                            vertical-align: top;
+
+                            // display: inline-block;
+                            // width: 30%;
+                            // margin: 2em 0 0 0;
+
+                            .search_pict{
+                                display: inline-block;
+                                width: 150px;
+                                height: 150px;
+                                background: #a0a0a0;
+                                padding: 5px;
+                                border: 1px solid #eaeaea;
+                                vertical-align: top;
+                                text-align: center;
+                                position: relative;
+                                border-radius: 10px;
+                                cursor: pointer;
+                                img{
+                                    max-width: 100%;
+                                    width: 100%;
+                                }
+                                .found-time{
+                                    font-size: 11px;
+                                    position: absolute;
+                                    right: 10px;
+                                    bottom: 5px;
+                                    color: #fff;
+                                    &:before{
+                                        content: '';
+                                        background-image: url(https://static.iviva.com/images/UXP_spaceworks/time-icon.svg);
+                                        background-position: center center;
+                                        background-repeat: no-repeat;
+                                        background-size: cover;
+                                        width: 12px;
+                                        height: 12px;
+                                        display: inline-block;
+                                        filter: invert(1);
+                                        position: absolute;
+                                        left: -17px;
+                                        top: -1px;
+                                    }
+                                }
+                            }
+                            h6{
+                                display: inline-block;
+                                font-size: 11px;
+                                padding: 10px 0 0 0;
+                                margin: 0;
+                                width: 71%; 
+                                line-height: 1.5em;
+                            }
                         }
                     }
                 }
@@ -1289,6 +1466,17 @@ span.recharts-legend-item-text {
             }
             .found-details-section{
                 display: block;
+                width: 85%;
+                overflow-y: auto;
+                overflow-x: hidden;
+                height: 78vh;
+
+                .found-details {
+                    display: inline-block;
+                    width: 100%;
+                    min-height: 80vh;
+                    max-height: 100vh;
+                }
             }
 
             .found-details{ 
@@ -1419,10 +1607,9 @@ span.recharts-legend-item-text {
                 width: 300px;
                 border: 1px solid #ddd;
                 position: absolute;
-                top: 14px;
-                right: 1em;
-                // height: 100%;
-                height: 95vh;
+                top: 15px;
+                right: 2em;
+                height: 76vh;
                 border-radius: 10px;
                 background-color: #ffffff;
 

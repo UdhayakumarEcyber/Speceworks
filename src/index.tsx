@@ -110,14 +110,14 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
 
     
 
-    // const people = [   
-    //     "Black Suitcase found near the rest room",
-    //     "Black bag found near stairs",
-    //     "Red Shoe found hostel room",
-    //     "Book found in prayer Area",
-    //     "Pen found in near enterance",
-    //     "Blue handbag found in Prayer Area"  
-    //   ];
+    const people = [   
+        "Black Suitcase found near the rest room",
+        "Black bag found near stairs",
+        "Red Shoe found hostel room",
+        "Book found in prayer Area",
+        "Pen found in near enterance",
+        "Blue handbag found in Prayer Area"  
+      ];
 
 
       const data_list = [
@@ -150,12 +150,12 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
         setSearchTerm(e.target.value);
     };
 
-    () => {
+    React.useEffect(() => {
         const results = people.filter(person =>
-          person.toLowerCase().includes(searchTerm.toLowerCase())
+          person.toLowerCase().includes(searchTerm)
         );
         setSearchResults(results);
-      }
+      }, [searchTerm]);
 
     const onChangeCheckbox = (checked: boolean) => {
         setCheckedCheckState(checked)

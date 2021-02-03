@@ -10,6 +10,9 @@ import { MapComponent } from 'uxp/components';
 import { render } from "react-dom";
  
 
+import { FileDrop } from 'react-file-drop';
+
+
 const DATA = [
     { 
         category: "BLACK HANDBAG FOUND NEAR THE ENTERANCE ",
@@ -74,7 +77,9 @@ const getDataItems = (max: number, pageToken: string) => {
 
     return p;
 }
-  
+
+ 
+
 
 // const TopBar: React.FunctionComponent<{}> = (props) => {   
  
@@ -108,40 +113,28 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
     let [showModal, setShowModal] = React.useState(false); 
     let [date, setDate] = React.useState<Date>(new Date())
 
-    
-
-    const people = [   
-        "Black Suitcase found near the rest room",
-        "Black bag found near stairs",
-        "Red Shoe found hostel room",
-        "Book found in prayer Area",
-        "Pen found in near enterance",
-        "Blue handbag found in Prayer Area"  
-      ];
-
-
-      const data_list = [
-        {
-            "Icon": "https://static.iviva.com/images/UXP_spaceworks/black-suitcase.png", 
-            "Name": "Black Suitcase found in the enterance",
-            "Time": "12:00 PM" 
-        },
-        {
-            "Icon": "https://static.iviva.com/images/UXP_spaceworks/black-handbag.png", 
-            "Name": "Black Handbag found near the enterance",
-            "Time": "02:00 PM"  
-        },
-        {
-            "Icon": "https://static.iviva.com/images/UXP_spaceworks/blue-bottle.png", 
-            "Name": "Water Bottle found in the playing Area",
-            "Time": "10:00 AM"  
-        },
-        {
-            "Icon": "https://static.iviva.com/images/UXP_spaceworks/American-possport.png", 
-            "Name": "American Passport found in the prayer area",
-            "Time": "08:00 AM"  
-        } 
-      ]; 
+    const data_list = [
+    {
+        "Icon": "https://static.iviva.com/images/UXP_spaceworks/black-suitcase.png", 
+        "Name": "Black Suitcase found in the enterance",
+        "Time": "12:00 PM" 
+    },
+    {
+        "Icon": "https://static.iviva.com/images/UXP_spaceworks/black-handbag.png", 
+        "Name": "Black Handbag found near the enterance",
+        "Time": "02:00 PM"  
+    },
+    {
+        "Icon": "https://static.iviva.com/images/UXP_spaceworks/blue-bottle.png", 
+        "Name": "Water Bottle found in the playing Area",
+        "Time": "10:00 AM"  
+    },
+    {
+        "Icon": "https://static.iviva.com/images/UXP_spaceworks/American-possport.png", 
+        "Name": "American Passport found in the prayer area",
+        "Time": "08:00 AM"  
+    } 
+    ]; 
   
       
     const [searchTerm, setSearchTerm] = React.useState("");
@@ -151,9 +144,11 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
     };
 
     React.useEffect(() => {
-        const results = people.filter(person =>
-          person.toLowerCase().includes(searchTerm)
-        );
+       
+        const results = data_list.filter(item =>
+            item.Name.toLowerCase().includes(searchTerm)
+          ); 
+
         setSearchResults(results);
       }, [searchTerm]);
 
@@ -353,7 +348,7 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
 
                                                     <div  className={isActive ? 'search-list1': "search-list"}>   
                                                         <ul>
-                                                            {data_list.map(item => (
+                                                            {searchResults.map(item => (
                                                                 
                                                                 <li key={item.Icon}>
 
@@ -368,7 +363,7 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
                                                         </ul> 
                                                     </div>
 
-                                                    {/* <ul className={isActive ? 'search-list1': "search-list"} >
+                                                      {/* <ul className={isActive ? 'search-list1': "search-list"} >
                                                         {searchResults.map(item => (
                                                             
                                                         
@@ -377,7 +372,7 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
 
                                                         ))} 
 
-                                                    </ul>   */}
+                                                    </ul>     */}
 
                                             </div>
 
@@ -388,7 +383,7 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
                                                 <ul>
                                                     <li>
 
-                                                        <div className="drog_drop">
+                                                    <div className="drog_drop">
                                                             <p>Drop your file</p>
                                                         </div>
 
@@ -491,7 +486,7 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
                                                                 </FormField>
                                                             </li>
 
-                                                            <li className="last-item-reported">
+                                                            <li className={isActive12 ? 'last-item-reported': "last-item-reported1"}>
                                                             <FormField inline className="showcase-checkbox" backgroundColor="white"> 
 
                                                                     <Label>Lost item reported</Label>
@@ -504,6 +499,21 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
                                                                     
                                                                 </FormField>
                                                             </li>
+
+
+                                                            {/* <li className="last-item-reported" >
+                                                            <FormField inline className="showcase-checkbox" backgroundColor="white"> 
+
+                                                                    <Label>Lost item reported</Label>
+                                                                    <Checkbox
+                                                                        onChange={onChangeCheckbox}
+                                                                        checked={checkedCheckState}
+                                                                        label=''
+                                                                        isValid
+                                                                    />
+                                                                    
+                                                                </FormField>
+                                                            </li> */}
                                                             
                                                         </ul>
                                                     </li>

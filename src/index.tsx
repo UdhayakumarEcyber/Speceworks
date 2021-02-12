@@ -6,11 +6,11 @@ import './styles.scss';
 
 //import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell, ComposedChart, } from 'recharts';
 
-import { MapComponent } from 'uxp/components'; 
-import { render } from "react-dom";
+import { MapComponent } from 'uxp/components';  
  
+import {useDropzone} from 'react-dropzone';
 
-import { FileDrop } from 'react-file-drop';
+import { TextArea } from '@thumbtack/thumbprint-react'; 
 
 
 const DATA = [
@@ -19,35 +19,45 @@ const DATA = [
         reported_time: "12:00 PM",
         location: "Enterance",
         filter :"", 
-        list_pict:"https://static.iviva.com/images/UXP_spaceworks/black-handbag.png"
+        list_pict:"https://static.iviva.com/images/UXP_spaceworks/black-handbag.png",
+        clock_Icon: "https://static.iviva.com/images/UXP_spaceworks/clock.svg", 
+        location_Icon: "https://static.iviva.com/images/UXP_spaceworks/location-icon.svg"
     },
     {
         category: "BLACK HANDBAG FOUND NEAR THE ENTERANCE ",
         reported_time: "12:00 PM",
         location: "Enterance",
         filter :"",
-        list_pict:"https://static.iviva.com/images/UXP_spaceworks/black-handbag.png"
+        list_pict:"https://static.iviva.com/images/UXP_spaceworks/black-handbag.png",
+        clock_Icon: "https://static.iviva.com/images/UXP_spaceworks/clock.svg", 
+        location_Icon: "https://static.iviva.com/images/UXP_spaceworks/location-icon.svg"
     },
     {
         category: "BLACK SUITCASE FOUND NEAR THE REST ROOM",
         reported_time: "12:00 PM",
         location: "Rest Room",
         filter :"",
-        list_pict:"https://static.iviva.com/images/UXP_spaceworks/black-suitcase.png"
+        list_pict:"https://static.iviva.com/images/UXP_spaceworks/black-suitcase.png",
+        clock_Icon: "https://static.iviva.com/images/UXP_spaceworks/clock.svg", 
+        location_Icon: "https://static.iviva.com/images/UXP_spaceworks/location-icon.svg"
     },
     { 
         category: "WATER BOTTLE IN THE PRAYER AREA",
         reported_time: "12:00 PM",
         location: "Prayer Area",
         filter :"",
-        list_pict:"https://static.iviva.com/images/UXP_spaceworks/blue-bottle.png"
+        list_pict:"https://static.iviva.com/images/UXP_spaceworks/blue-bottle.png",
+        clock_Icon: "https://static.iviva.com/images/UXP_spaceworks/clock.svg", 
+        location_Icon: "https://static.iviva.com/images/UXP_spaceworks/location-icon.svg"
     }, 
     {
         category: "AMERICAN PASSPORTS FOUND IN THE PRAYER AREA",
         reported_time: "12:00 PM",
         location: "Prayer Area",
         filter :"",
-        list_pict:"https://static.iviva.com/images/UXP_spaceworks/American-possport.png"
+        list_pict:"https://static.iviva.com/images/UXP_spaceworks/American-possport.png",
+        clock_Icon: "https://static.iviva.com/images/UXP_spaceworks/clock.svg", 
+        location_Icon: "https://static.iviva.com/images/UXP_spaceworks/location-icon.svg"
     }
 ];
 
@@ -58,8 +68,8 @@ const DATA = [
   const renderItem = (item: any, key: number) => {
     return (<div className="list-item">
         <div className="category"><span><img src={item.list_pict} /> </span>{item.category}</div>
-        <div className="reported_time">{item.reported_time}</div>
-        <div className="location">{item.location}</div> 
+        <div className="reported_time"><span className="clock_icon"><img src={item.clock_Icon} /></span>{item.reported_time}</div>
+        <div className="location"><span className="location_icon"><img src={item.location_Icon} /> </span>{item.location}</div> 
         <div className="filter">{item.filter}</div> 
     </div>)
 }
@@ -77,9 +87,7 @@ const getDataItems = (max: number, pageToken: string) => {
 
     return p;
 }
-
  
-
 
 // const TopBar: React.FunctionComponent<{}> = (props) => {   
  
@@ -96,12 +104,271 @@ const getDataItems = (max: number, pageToken: string) => {
 
 //     </>
 // } 
+  
+ 
+const MapWidget: React.FunctionComponent<{}> = (props) => { 
+
+    // const MapComponent: React.FunctionComponent<IMapComponentProps> = (props) => { 
+
+    let [defCheckState, setDefCheckState] = React.useState<boolean>(false);
+    // const onChangeCheckboxDef = (checked: boolean) => {
+    //     setDefCheckState(checked);
+    // }
+
+    let [checkedCheckState, setCheckedCheckState] = React.useState<boolean>(true);
+    const onChangeCheckbox = (checked: boolean) => {
+        setCheckedCheckState(checked)
+    }
+
+   // props
+//    let { mapUrl, markers, onMarkerClick, center, zoom, regions, onClick, onRegionClick } = props;
+  
+    return <>
+        <WidgetWrapper> 
+
+           
+
+        <TitleBar title='' className="map-title"> </TitleBar>  
+
+            <div id="Map_Widget">   
+
+                 <div className="building_map">  
+
+                <MapComponent
+                    mapUrl="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    markers={[
+                        {
+                            latitude: 24.4672,
+                            longitude: 39.6112
+                            
+                        },
+                        {
+                            latitude: 24.4672,
+                            longitude: 39.6112,
+                            data: {
+                                name: "Dubai"
+                            }
+                            // { latitude: 24.46848149, longitude: 39.6104381 }
+                        }
+
+                    ]}
+
+                    zoom={18}
+                    center={{ position: { latitude: 24.46848149, longitude: 39.6104381 }, renderMarker: false }}
+
+                    onMarkerClick={(el, data) => {
+                        console.log(el)
+                        console.log(data)
+                    }}
+
+                /> 
+
+                     <div className="social-distancing-vilation">
+                            <div className="social-distancing-sec">
+                                <span className="social-distancing-sec-pict"></span>
+                                <label>Social distancing vialations</label>
+                                <em>134</em>
+                            </div>
+                            <div className="social-distancing-check">
+                            <Checkbox
+                                    onChange={onChangeCheckbox}
+                                    checked={checkedCheckState}
+                                    label='View'
+                                    type="switch-line"
+                                    isValid
+                                />
+                            </div> 
+                     </div> 
+
+                     <div className="map-list-items">
+                             <div className="map-item enlarge-item"></div> 
+                             <div className="map-item material-tool"></div> 
+                             <div className="map-item map-data-count"></div> 
+                             <div className="map-item zone-item"></div> 
+                             <div className="map-item zoom_out-item"></div> 
+                             <div className="map-item zoom_in-item"></div>  
+                     </div>
+
+                 </div>
+
+            </div>
+        </WidgetWrapper>
+
+    </>
+} 
  
 
+
+const ProfileCard: React.FunctionComponent<{}> = (props) => {
+ 
+    return <>
+        <WidgetWrapper>
+
+        <TitleBar title='' className="profile-title"> </TitleBar>   
+
+            <div id="profile_Card">  
+
+            <div className="profile-lft">
+                <div className="profile-pict"></div>
+            </div>
+
+            <div className="profile-rgt">
+                <div className="profile-details">
+                    <button className="btn profile-btn">Al-Masjid an-Nabawi</button>
+                    <h5>NEW LOST ITEM REPORTED</h5>
+                    <h1>BLACK HANDBAG</h1>
+                    <p>AT 12:30 PM</p>
+                    <div className="profile-details-bot">
+                        {/* <button className="btn alert-btn">Alert Team</button> */}
+
+                        <Button className="btn alert-btn profile-btn"
+                            title="Alert Team"
+                            onClick={() => alert("clicked")} 
+                        /> 
+                        
+                        <Button className="btn profile-btn"
+                            title="View CCTV"
+                            onClick={() => alert("clicked")}
+                            icon="https://static.iviva.com/images/UXP_spaceworks/cctv-icon.png" 
+                        />
+
+                    </div>
+                </div>
+            </div>
+
+            </div>
+        </WidgetWrapper>  
+    </>
+} 
+
+
+const AlmasjidWidget: React.FunctionComponent<{}> = (props) => { 
+    let [selected, setSelected] = React.useState<string | null>("op-1");
+   
+
+    return <>
+        <WidgetWrapper>
+
+        <TitleBar className="Almasjid-header"
+                icon='https://static.iviva.com/images/Adani_UXP/users.svg'
+                title='AL-MASJID AN-NABAWI' >
+
+                <div className="uti-analytics_rht">  
+
+                    <div className="uti-sel-boxes">
+                        <div className="uti-sel-box sel-margin">
+                            <FormField inline className="showcase-input" backgroundColor="white">
+                                <Select
+                                    selected={selected}
+                                    options={[
+                                        { 
+                                            label: "Al-Masjid on-Nabawi", 
+                                            value: "op-1",
+                                            name : "udhaya"  
+                                        },
+                                        { 
+                                            label: "Al-Masjid on-Nabawi",
+                                            value: "op-2",
+                                            name : "udhaya2" 
+                                        
+                                        },
+                                        { 
+                                            label: "Al-Masjid on-Nabawi", 
+                                            value: "op-3",
+                                            name : "udhaya3"
+                                         },
+                                    ]}
+                                    onChange={(value) => { setSelected(value) }}
+                                    placeholder=" -- select --"
+                                />
+                            </FormField>
+                        </div> 
+                    </div> 
+                </div>
+            </TitleBar>  
+
+            <div id="Almasjid_Widget">   
+
+                <ItemListCard className="list-boxes" title=""
+                                item={{
+                                    "hvac": { 
+                                        "icon": "https://static.iviva.com/images/UXP_spaceworks/air-conditioner.svg", 
+                                        "top_label": 75,
+                                        "green_icon" : "https://static.iviva.com/images/UXP_spaceworks/top-arrow.png",
+                                        "bot_label": 25,
+                                        "red_icon" : "https://static.iviva.com/images/UXP_spaceworks/bottom-arrow.png" 
+                                    },
+                                    "lighting": {
+                                        "icon": "https://static.iviva.com/images/UXP_spaceworks/light.svg", 
+                                        "top_label": 75,
+                                        "green_icon" : "https://static.iviva.com/images/UXP_spaceworks/top-arrow.png",
+                                        "bot_label": 25,
+                                        "red_icon" : "https://static.iviva.com/images/UXP_spaceworks/bottom-arrow.png" 
+                                    },
+                                    "elevators": {
+                                        "icon": "https://static.iviva.com/images/UXP_spaceworks/elevater.png",
+                                        "top_label": 75,
+                                        "green_icon" : "https://static.iviva.com/images/UXP_spaceworks/top-arrow.png",
+                                        "bot_label": 25,
+                                        "red_icon" : "https://static.iviva.com/images/UXP_spaceworks/bottom-arrow.png" 
+                                    },
+                                    "fire alarm": {
+                                        "icon": "https://static.iviva.com/images/UXP_spaceworks/Fire_Alarm.svg",
+                                        "top_label": 75,
+                                        "green_icon" : "https://static.iviva.com/images/UXP_spaceworks/top-arrow.png",
+                                        "bot_label": 25,
+                                        "red_icon" : "https://static.iviva.com/images/UXP_spaceworks/bottom-arrow.png" 
+                                    }
+                                }}
+                                 
+                                fields={["hvac", "lighting", "elevators", "fire alarm"]}
+                                
+                                renderField={(item, field) => {
+                                    
+                                    return (
+                                    
+                                        <div className="box">
+                                            <div className="box-top">
+                                                <label className="label">{item[field].top_label}</label>
+                                                <span className="top-icon">
+                                                    <img src={item[field].green_icon} />
+                                                </span>
+                                            </div>
+
+                                            <div className="box-item">
+                                                <div className="box-cont"> 
+                                                    <div className="icon box-items_icon">
+                                                        <img src={item[field].icon} />
+                                                    </div>
+                                                    <p>{field.toUpperCase()}</p>
+                                                </div>
+                                            </div>
+
+                                            <div className="box-bot">
+                                                <label className="label">{item[field].bot_label}</label>
+                                                <span className="bot-icon">
+                                                    <img src= {item[field].red_icon} />
+                                                 </span>
+                                            </div>
+                                        </div>   
+                                    )
+                                     
+                                }}
+                               // backgroundColor="rgb(209 148 250)" 
+                            />
+                            <div id="Almas_lft_arrow"></div>  
+
+            </div>
+        </WidgetWrapper>
+
+    </>
+}  
 
  
  
 const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => { 
+
+    
  
     let [selected, setSelected] = React.useState<string | null>("op-1");
     let [inputValue, setInputValue] = React.useState<string | null>("");  
@@ -207,11 +474,73 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
      clicked = !clicked;
   }
 
+
+
+
+  function MyDropzone() {
+    const onDrop = React.useCallback((acceptedFiles) => {
+      acceptedFiles.forEach((file: Blob) => {
+        const reader = new FileReader()
   
+        reader.onabort = () => console.log('file reading was aborted')
+        reader.onerror = () => console.log('file reading has failed')
+        reader.onload = () => { 
+          const binaryStr = reader.result
+          console.log(binaryStr)
+        }
+        reader.readAsArrayBuffer(file)
+      })
+      
+    }, [])
+    const {getRootProps, getInputProps} = useDropzone({onDrop})
+  
+    return (
+      <div {...getRootProps()}>
+        <input {...getInputProps()} />
+        <p>Drop your file</p>
+      </div>
+    )
+  } 
+
+
+  const Message = () => {
+    const [message, setMessage] = React.useState( '' );
+  
+    return (
+      <div>
+        <input
+           type="text"
+           value={message}
+           placeholder="Enter a message"
+           onChange={e => setMessage(e.target.value)}
+         />
+        <p>
+          <strong>{message}</strong>
+        </p>
+      </div>
+    );
+  };
+
+
+  function TextAreaExample() {
+    const [value, setValue] = React.useState(
+        'We need something to call the reported item by',
+    );
+    return (
+        <TextArea
+            hasError
+            placeholder="Tell us about your business"
+            onChange={v => setValue(v)}
+            value={value}
+        />
+    );
+}
  
     return <> 
      
         <WidgetWrapper> 
+
+          
        
             <TitleBar className="lost_found-title"
                 icon='https://static.iviva.com/images/UXP_spaceworks/open-box.svg'
@@ -257,7 +586,9 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
                                     onChange={(value) => { setSelected(value) }}
                                     placeholder=" -- select --"
                                 />
-                            </FormField> 
+                            </FormField>  
+
+
                         </div> 
                     </div> 
                 </div>
@@ -268,7 +599,7 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
                 <div className="technician_chart-section inline bgWhite" id="lostFound_Analytics">
                     {/* <h4>Number of hours</h4>
                      */}
-
+ 
                     <div className="lost_found-table"> 
                                 <div className="header"> 
                                     <div className="list-item">
@@ -383,8 +714,8 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
                                                 <ul>
                                                     <li>
 
-                                                    <div className="drog_drop">
-                                                            <p>Drop your file</p>
+                                                    <div className="drog_drop">  
+                                                            <MyDropzone /> 
                                                         </div>
 
                                                     </li>
@@ -414,7 +745,7 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
                                                     <li>
                                                     <FormField inline className="showcase-input" backgroundColor="white">
                                                             <Label>Item description</Label>
-                                                            <textarea className="form-control" id="exampleFormControlTextarea1"></textarea>
+                                                            <TextAreaExample/> 
                                                         </FormField>
                                                         
                                                     </li>
@@ -498,23 +829,7 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
                                                                     />
                                                                     
                                                                 </FormField>
-                                                            </li>
-
-
-                                                            {/* <li className="last-item-reported" >
-                                                            <FormField inline className="showcase-checkbox" backgroundColor="white"> 
-
-                                                                    <Label>Lost item reported</Label>
-                                                                    <Checkbox
-                                                                        onChange={onChangeCheckbox}
-                                                                        checked={checkedCheckState}
-                                                                        label=''
-                                                                        isValid
-                                                                    />
-                                                                    
-                                                                </FormField>
-                                                            </li> */}
-                                                            
+                                                            </li>   
                                                         </ul>
                                                     </li>
                                                     
@@ -568,254 +883,7 @@ const LostFoundAnalytics: React.FunctionComponent<{}> = (props) => {
     </>
 } 
  
-
-
  
- const ProfileCard: React.FunctionComponent<{}> = (props) => {
- 
-    return <>
-        <WidgetWrapper>
-
-        <TitleBar title='' className="profile-title"> </TitleBar>  
- 
-
-            <div id="profile_Card">  
-
-            <div className="profile-lft">
-                <div className="profile-pict"></div>
-            </div>
-
-            <div className="profile-rgt">
-                <div className="profile-details">
-                    <button className="btn profile-btn">Al-Masjid an-Nabawi</button>
-                    <h5>NEW LOST ITEM REPORTED</h5>
-                    <h1>BLACK HANDBAG</h1>
-                    <p>AT 12:30 PM</p>
-                    <div className="profile-details-bot">
-                        <button className="btn alert-btn">Alert Team</button>
-                        
-                        {/* <button className="btn profile-btn">View CCTV</button> */}
-                        
-                        <Button className="btn profile-btn"
-                            title="View CCTV"
-                            onClick={() => alert("clicked")}
-                            icon="https://static.iviva.com/images/UXP_spaceworks/cctv-icon.png" 
-                        />
-
-                    </div>
-                </div>
-            </div>
-
-            </div>
-        </WidgetWrapper>
-
-        
-
-    </>
-} 
-
-
-const AlmasjidWidget: React.FunctionComponent<{}> = (props) => { 
-    let [selected, setSelected] = React.useState<string | null>("op-1");
-   
-
-    return <>
-        <WidgetWrapper>
-
-        <TitleBar className="Almasjid-header"
-                icon='https://static.iviva.com/images/Adani_UXP/users.svg'
-                title='AL-MASJID AN-NABAWI' >
-
-                <div className="uti-analytics_rht">  
-
-                    <div className="uti-sel-boxes">
-                        <div className="uti-sel-box sel-margin">
-                            <FormField inline className="showcase-input" backgroundColor="white">
-                                <Select
-                                    selected={selected}
-                                    options={[
-                                        { label: "Al-Masjid on-Nabawi", value: "op-1" },
-                                        { label: "Al-Masjid on-Nabawi", value: "op-2" },
-                                        { label: "Al-Masjid on-Nabawi", value: "op-3" },
-                                    ]}
-                                    onChange={(value) => { setSelected(value) }}
-                                    placeholder=" -- select --"
-                                />
-                            </FormField>
-                        </div> 
-                    </div> 
-                </div>
-            </TitleBar>  
-
-            <div id="Almasjid_Widget">   
-
-                <ItemListCard className="list-boxes" title=""
-                                item={{
-                                    "hvac": { 
-                                        "icon": "https://static.iviva.com/images/Adani_UXP/AC_min.png", 
-                                        "top_label": 75,
-                                        "green_icon" : "https://static.iviva.com/images/UXP_spaceworks/top-arrow.png",
-                                        "bot_label": 25,
-                                        "red_icon" : "https://static.iviva.com/images/UXP_spaceworks/bottom-arrow.png" 
-                                    },
-                                    "lighting": {
-                                        "icon": "https://static.iviva.com/images/UXP_spaceworks/light.svg", 
-                                        "top_label": 75,
-                                        "green_icon" : "https://static.iviva.com/images/UXP_spaceworks/top-arrow.png",
-                                        "bot_label": 25,
-                                        "red_icon" : "https://static.iviva.com/images/UXP_spaceworks/bottom-arrow.png" 
-                                    },
-                                    "elevators": {
-                                        "icon": "https://static.iviva.com/images/UXP_spaceworks/elevater.png",
-                                        "top_label": 75,
-                                        "green_icon" : "https://static.iviva.com/images/UXP_spaceworks/top-arrow.png",
-                                        "bot_label": 25,
-                                        "red_icon" : "https://static.iviva.com/images/UXP_spaceworks/bottom-arrow.png" 
-                                    },
-                                    "fire alarm": {
-                                        "icon": "https://static.iviva.com/images/UXP_spaceworks/Fire_Alarm.svg",
-                                        "top_label": 75,
-                                        "green_icon" : "https://static.iviva.com/images/UXP_spaceworks/top-arrow.png",
-                                        "bot_label": 25,
-                                        "red_icon" : "https://static.iviva.com/images/UXP_spaceworks/bottom-arrow.png" 
-                                    }
-                                }}
-                                 
-                                fields={["hvac", "lighting", "elevators", "fire alarm"]}
-                                
-                                renderField={(item, field) => {
-                                    
-                                    return (
-                                    
-                                        <div className="box">
-                                            <div className="box-top">
-                                                <label className="label">{item[field].top_label}</label>
-                                                <span className="top-icon">
-                                                    <img src={item[field].green_icon} />
-                                                </span>
-                                            </div>
-
-                                            <div className="box-item"> 
-                                                <div className="icon box-items_icon">
-                                                    <img src={item[field].icon} />
-                                                </div>
-                                                <p>{field.toUpperCase()}</p>
-                                            </div>
-
-                                            <div className="box-bot">
-                                                <label className="label">{item[field].bot_label}</label>
-                                                <span className="bot-icon">
-                                                    <img src= {item[field].red_icon} />
-                                                 </span>
-                                            </div>
-                                        </div>   
-                                    )
-                                     
-                                }}
-                               // backgroundColor="rgb(209 148 250)" 
-                            />
-                            <div id="Almas_lft_arrow"></div> 
-                 
-
-            </div>
-        </WidgetWrapper>
-
-    </>
-}  
-
-
-
-
-
-const MapWidget: React.FunctionComponent<{}> = (props) => { 
-
-    // const MapComponent: React.FunctionComponent<IMapComponentProps> = (props) => {
-
-
-    let [defCheckState, setDefCheckState] = React.useState<boolean>(false);
-    // const onChangeCheckboxDef = (checked: boolean) => {
-    //     setDefCheckState(checked);
-    // }
-
-    let [checkedCheckState, setCheckedCheckState] = React.useState<boolean>(true);
-    const onChangeCheckbox = (checked: boolean) => {
-        setCheckedCheckState(checked)
-    }
-
-   // props
-//    let { mapUrl, markers, onMarkerClick, center, zoom, regions, onClick, onRegionClick } = props;
- 
-
-
-    return <>
-        <WidgetWrapper> 
-
-        <TitleBar title='' className="map-title"> </TitleBar>  
-
-            <div id="Map_Widget">  
-
-                 <div className="building_map"> 
-
-                 <MapComponent
-                    mapUrl="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    markers={[
-                        {
-                            latitude: 6.927079,
-                            longitude: 79.861244
-                        },
-                        {
-                            latitude: 1.290270,
-                            longitude: 103.851959,
-                            data: {
-                                name: "singapore"
-                            }
-                        }
-
-                    ]}
-                    onMarkerClick={(el, data) => {
-                        console.log(el)
-                        console.log(data)
-                    }}
-
-                />
-    
-
-                     <div className="social-distancing-vilation">
-                            <div className="social-distancing-sec">
-                                <span className="social-distancing-sec-pict"></span>
-                                <label>Social distancing vialations</label>
-                                <em>134</em>
-                            </div>
-                            <div className="social-distancing-check">
-                            <Checkbox
-                                    onChange={onChangeCheckbox}
-                                    checked={checkedCheckState}
-                                    label='View'
-                                    type="switch-line"
-                                    isValid
-                                />
-                            </div> 
-                     </div>
-
-
-                     <div className="map-list-items">
-                             <div className="map-item enlarge-item"></div> 
-                             <div className="map-item material-tool"></div> 
-                             <div className="map-item map-data-count"></div> 
-                             <div className="map-item zone-item"></div> 
-                             <div className="map-item zoom_out-item"></div> 
-                             <div className="map-item zoom_in-item"></div>  
-                     </div>
-
-                 </div>
-
-            </div>
-        </WidgetWrapper>
-
-    </>
-} 
-
-
 <div id="footer">
     <p>Powered by spaceworx.io</p>
 </div>

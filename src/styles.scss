@@ -85,25 +85,47 @@
                         height: 40px;
                         vertical-align: middle;
                         margin-right: 15px;
-                        img{
-                            max-width: 100%;
-                            max-height: 100%;
-                        }
+                         
                     }
                 } 
                 .reported_time{
                     display: inline-block;
                     width: 17%;
                     padding-top: 12px;
+
+                    span{
+                        display: inline-block;
+                        width: 10px;
+                        height: 10px;
+                        vertical-align: middle;
+                        margin-right: 10px; 
+                        filter: opacity(0.6);
+                    }
                 }
                 .location{
                     display: inline-block;
                     width: 17%;
                     padding-top: 12px;
+
+                    span{
+                        display: inline-block;
+                        width: 15px;
+                        height: 15px;
+                        vertical-align: middle;
+                        margin-right: 10px;
+                        filter: opacity(0.6);
+                       
+                    }
                 }
                 .filter{
                     display: inline-block;
                     width: 8%;
+                }
+                span{ 
+                    img{
+                        max-width: 100%;
+                        max-height: 100%;
+                    }
                 }
             }
         }
@@ -169,7 +191,11 @@
     }
 
     .uti-analytics_rht {
-        margin-top: 0.5em;
+        // margin-top: 0.5em;
+
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+
     }
 }
 span.recharts-legend-item-text {
@@ -767,9 +793,9 @@ span.recharts-legend-item-text {
 
 
 .widget-container-block .layout .layout-item{
-    min-width: 468px;
+    min-width: 480px;
     max-width: 100%;
-    width: 468px;
+    width: 480px;
 }
 
 // .profile-title{
@@ -785,13 +811,13 @@ span.recharts-legend-item-text {
 
 #profile_Card{ 
     background: #f8ba7b; /* Old browsers */
-    background: -moz-linear-gradient(-45deg, #f8ba7b 0%, #f8ba7b 19%, #605ae6 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(-45deg, #f8ba7b 0%,#f8ba7b 19%,#605ae6 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(135deg, #f8ba7b 0%,#f8ba7b 19%,#605ae6 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8ba7b', endColorstr='#605ae6',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    background: -moz-linear-gradient(120deg, #E3B969 0%, #7267e4 50%, #372F8E 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(120deg, #E3B969 0%, #7267e4 50%, #372F8E 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(120deg, #E3B969 0%, #7267e4 50%, #372F8E 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#E3B969', endColorstr='#372F8E',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
     height: 100%;
     padding-top: 5em;
-    min-width: 468px;
+    min-width: 455px;
     max-width: 100%;
     width: 468px;
 
@@ -829,6 +855,10 @@ span.recharts-legend-item-text {
                 background: #605ae633;
                 color: #fff;
                 font-size: 12px;
+                &.alert-btn{
+                    padding: 12px 15px;
+                    vertical-align: top;
+                }
             }
             .alert-btn{
                 display: inline-block;
@@ -868,6 +898,8 @@ span.recharts-legend-item-text {
 
 .Almasjid-header{
     .uti-analytics_rht { 
+        margin-top: 1em;
+        margin-bottom: 0.5em;
         .uti-sel-boxes { 
             width: 30%; 
             .uti-sel-box{
@@ -887,8 +919,7 @@ span.recharts-legend-item-text {
         height: 100%;
         overflow-x: auto;
         margin-left: 2%;
-        overflow-y: hidden;
-   
+        overflow-y: hidden; 
 
         .header{
             display: none;
@@ -901,7 +932,7 @@ span.recharts-legend-item-text {
             padding: 10px 15px;
 
             .box {
-                background:#dadada61;
+                background:#efefef;
                 border-radius: 20px; 
                 display: inline-block;
                 // width: 30%;
@@ -914,38 +945,55 @@ span.recharts-legend-item-text {
                 cursor: pointer;
                 &:hover{
                     border-radius: 50%; 
+                    background:#ffedfd; 
+
+                    .box-item{
+                        padding: 3em 0;
+                        margin: 4.5em 0; 
+                        // background: linear-gradient(0deg, #33261E 0%,  #33261E 15%, #33261E 75%, #f58220 75%,  #f58220 100%); 
+
+                        background: linear-gradient(180deg, #33261E 0%,  #33261E 15%, #33261E 75%, #f58220 75%,  #f58220 100%); 
+                        
+                        transition-timing-function: ease-in-out;
+
+                            &:before {
+                                background:#ffedfd;
+                            } 
+                            .box-cont{ 
+                                .box-items_icon{
+                                    width: 60px;
+                                    height: 52px;
+                                } 
+                                p{
+                                    display: none;
+                                }
+                            }
+                    }
+
                     .box-top, .box-bot{
                         background: #fff;
                         padding: 6px 10px 2px 10px;
                         border-radius: 20px;
+                        box-shadow: 1px 1px 7px #46464685;
+                        z-index: 1;
                     }
                     .box-top{
                         top:5em;
                     }
                     .box-bot{
                         bottom: 5em;
-                    }
-                    .box-item{
-                        padding: 3em 0;
-                        margin: 4.5em 0;
-
-                        
-
-                        .box-items_icon{
-                            width: 60px;
-                            height: 52px;
-                        }
-
-                        p{
-                            display: none;
-                        }
-                    }
+                    } 
                 }
 
-                &:first-child{
-                    margin-left: 0;
-                    background:#ffacf44d;
-                }
+                // &:first-child{
+                //     margin-left: 0;
+                //     background:#ffedfd;
+                //         .box-item{
+                //             &:before {
+                //             background:#ffedfd;
+                //             }
+                //         }
+                // }
                 .box-top, .box-bot{
                     display: inline-block;
                     position: absolute; 
@@ -976,29 +1024,56 @@ span.recharts-legend-item-text {
                     .box-item{
                         display: inline-block;
                         width: 10em;
-                        border-radius: 50%;
-
-                        border-style: solid;
-                        border-width: 4px;
-                        // border-image: linear-gradient(45deg, rgb(0,143,104), rgb(250,224,66)) 1;
-
+                        border-radius: 50%; 
                         height: 10em;
                         padding: 2em 0;
                         margin: 4.5em 0;
-                        p{
-                            display: inline-block;
-                            width: 100%;
-                            padding: 0;
-                            margin: 0;
-                            font-size: 10px;
+                        position: relative; 
+                        //  background: linear-gradient(0deg, #33261E 0%,  #33261E 15%, #33261E 85%, #f58220 85%,  #f58220 100%); 
+                        background: linear-gradient(180deg, #33261E 0%,  #33261E 15%, #33261E 85%, #f58220 85%,  #f58220 100%); 
+                        transition-timing-function: ease-in-out;
+                      
+
+                        &:before {
+                            content: '';
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            height: 90%;
+                            width: 90%;
+                            background: #efefef;
+                            border-radius: 50%;
                         }
-                        .box-items_icon{
-                            display: inline-block;
-                            width: 40px;
-                            height: 40px;
-                            img{
-                                max-width: 100%;
-                                max-height: 100%;
+
+                        .box-cont{
+
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            text-align: center;
+                            z-index: 0;
+                         
+                           
+
+
+                            p{
+                                display: inline-block;
+                                width: 100%;
+                                padding: 0;
+                                margin: 0;
+                                font-size: 10px;
+                            }
+                            .box-items_icon{
+                                display: inline-block;
+                                width: 40px;
+                                height: 40px;
+                                margin-right: 0;
+                                img{
+                                    max-width: 100%;
+                                    max-height: 100%;
+                                }
                             }
                         }
                     }
@@ -1184,6 +1259,17 @@ span.recharts-legend-item-text {
       
         .modal-panel {
             min-height: 75%;
+
+            height: 90vh;
+
+            background-image: url('https://static.iviva.com/images/UXP_spaceworks/model-bg.png'); 
+            background-position: center bottom;
+            background-repeat: no-repeat;
+            background-size: 115%;
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+
 
             .modal-header {
                 width: 100%;
@@ -1469,7 +1555,7 @@ span.recharts-legend-item-text {
                 width: 85%;
                 overflow-y: auto;
                 overflow-x: hidden;
-                height: 78vh;
+                height: 67vh;
 
                 .found-details {
                     display: inline-block;
@@ -1496,8 +1582,10 @@ span.recharts-legend-item-text {
                             margin: 0 1%;
                             text-align: center;
                             cursor: pointer;
-                            p{
-                                font-size: 13px;
+                            div{
+                                outline: none;
+                                font-size: 13px; 
+                                padding: 2em; 
                             }
                         }
 
@@ -1609,7 +1697,7 @@ span.recharts-legend-item-text {
                 position: absolute;
                 top: 15px;
                 right: 2em;
-                height: 76vh;
+                height: 69vh;
                 border-radius: 10px;
                 background-color: #ffffff;
 
@@ -1682,4 +1770,14 @@ span.recharts-legend-item-text {
 
 .lost_found-model.modal-container .modal-panel .modal-body .lost_found_search .found-details ul li ul li.last-item-reported{
     display: inline-block;
+}
+
+#uxp-map-component-container{
+    width: 100%;
+    height: 100%;
+}
+
+.uxp-widget-title-bar { 
+    padding: 1px 15px;
+    min-height: 30px; 
 }
